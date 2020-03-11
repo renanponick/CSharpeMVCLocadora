@@ -1,0 +1,6 @@
+C:\Users\renan.ponick\CSharpeAvaliacaoMVCLocadora\obj\Debug\netcoreapp3.1\CSharpeAvaliacaoMVCLocadora.csprojAssemblyReference.cache
+C:\Users\renan.ponick\CSharpeAvaliacaoMVCLocadora\obj\Debug\netcoreapp3.1\staticwebassets\CSharpeAvaliacaoMVCLocadora.StaticWebAssets.Manifest.cache
+C:\Users\renan.ponick\CSharpeAvaliacaoMVCLocadora\obj\Debug\netcoreapp3.1\staticwebassets\CSharpeAvaliacaoMVCLocadora.StaticWebAssets.xml
+C:\Users\renan.ponick\CSharpeAvaliacaoMVCLocadora\obj\Debug\netcoreapp3.1\CSharpeAvaliacaoMVCLocadora.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\renan.ponick\CSharpeAvaliacaoMVCLocadora\obj\Debug\netcoreapp3.1\CSharpeAvaliacaoMVCLocadora.AssemblyInfoInputs.cache
+C:\Users\renan.ponick\CSharpeAvaliacaoMVCLocadora\obj\Debug\netcoreapp3.1\CSharpeAvaliacaoMVCLocadora.AssemblyInfo.cs
