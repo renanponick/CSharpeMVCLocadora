@@ -34,13 +34,12 @@ namespace ModelClientes
                                 $"Qtde Filmes Locados: {FilmesLocados}\n";
                            
             if(Locacoes.Count>0){
-                    retorno += "\nFilmes Locados:\n";
                 int aux = 0 ;
                 foreach(ClasseLocacao locacao in Locacoes){
                     aux ++;
                         retorno += $" ----------- Locação - {aux} -------------\n";
                     foreach(ClasseFilme filme in locacao.Filmes){
-                            retorno += filme.Nome;
+                            retorno += filme.Nome+"\n";
                     }
                     locacao.calculaData();
                     locacao.calcularPrecoFinal();
@@ -48,7 +47,7 @@ namespace ModelClientes
                                     $"Data Locado: {locacao.DataLocacao} \n"+
                                     $"Data de Devolução: {locacao.DataDevolucao} \n";
                 }
-                    retorno += $"Quantidade de locações realizadas foi: {aux} \n";
+                    retorno += $"\nQuantidade de locações realizadas foi: {aux} \n----------------------------------------------------------\n";
             }   
             return retorno;
         }
