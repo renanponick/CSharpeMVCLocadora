@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Clientes;
-using Filmes;
+using ModelClientes;
+using ModelFilmes;
 
-namespace Locacoes
+namespace ModelLocacoes
 {
     public class ClasseLocacao
     {

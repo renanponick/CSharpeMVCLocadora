@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Locacoes;
-using Filmes;
+using ModelLocacoes;
+using ModelFilmes;
 using System.Linq;
 
-namespace Clientes
+namespace ModelClientes
 {
     public class ClasseCliente
     {
@@ -23,31 +23,34 @@ namespace Clientes
             Cpf = cpf;
             Dias = dias;
             FilmesLocados = 0;
+            Repositories.RepositorioGeral.addClientes(this);
         }
         public override string ToString(){
-            Console.WriteLine($"Id: {ID}");
-            Console.WriteLine($"Nome: {Nome}");
-            Console.WriteLine($"Nascido em: {DataNascimento}");
-            Console.WriteLine($"Cpf : {Cpf}");
-            Console.WriteLine($"Dias para devolução: {Dias}");
-            Console.WriteLine($"Qtde Filmes Locados: {FilmesLocados}");
-            if(locacoes.ElementAt(0).Id!=0){
-                Console.WriteLine("Filmes Locados:");
+             String retorno = $"Id: {ID}\n"+
+                                $"Nome: {Nome}\n"+
+                                $"Nascido em: {DataNascimento}\n"+
+                                $"Cpf : {Cpf}\n"+
+                                $"Dias para devolução: {Dias}\n"+
+                                $"Qtde Filmes Locados: {FilmesLocados}\n";
+                           
+            if(Locacoes.Count>0){
+                    retorno += "\nFilmes Locados:\n";
                 int aux = 0 ;
                 foreach(ClasseLocacao locacao in Locacoes){
                     aux ++;
-                    Console.WriteLine($" ----------- Locação - {aux} -------------");
+                        retorno += $" ----------- Locação - {aux} -------------\n";
                     foreach(ClasseFilme filme in locacao.Filmes){
-                        Console.WriteLine(filme.Nome);
+                            retorno += filme.Nome;
                     }
                     locacao.calculaData();
                     locacao.calcularPrecoFinal();
-                    Console.WriteLine($"Valor pago R$: {locacao.ValorTotal}");
-                    Console.WriteLine($"Data Locado: {locacao.DataLocacao}");
-                    Console.WriteLine($"Data de Devolução: {locacao.DataDevolucao}");
+                        retorno += $"Valor pago R$: {locacao.ValorTotal} \n"+
+                                    $"Data Locado: {locacao.DataLocacao} \n"+
+                                    $"Data de Devolução: {locacao.DataDevolucao} \n";
                 }
-                Console.WriteLine($"Quantidade de locações realizadas foi: {aux}");
-            }
+                    retorno += $"Quantidade de locações realizadas foi: {aux} \n";
+            }   
+            return retorno;
         }
     }
 }

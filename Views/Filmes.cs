@@ -1,18 +1,20 @@
-/* switch(op){
-                case 1:{
-                    foreach(Cliente cliente in clientes){
-                        Console.WriteLine("==================");
-                        cliente.retornaDados();
-                        Console.WriteLine("==================");
-                    }
-                    break;
-                }
-                case 2:{
-                    foreach(Filme filme in filmes){
-                        Console.WriteLine("==================");
-                        filme.dadosFilme();
-                        Console.WriteLine("==================");
-                    }
-                    break;
-                }
-            } */
+using System;
+using ModelFilmes;
+using ControllerFilmes;
+
+namespace ViewFilmes{
+    public class ViewFilme{
+        public static void addTodosFilmes(){
+            ControllerFilme.addTodosFilmes();
+        }
+        public static void addFilme(){
+            ControllerFilme.addFilme();
+        }
+        public static void getFilmes(){
+            foreach(ClasseFilme filme in ControllerFilme.getFilmes()){
+                Console.WriteLine(filme);
+            }
+        }
+    }
+}
+           

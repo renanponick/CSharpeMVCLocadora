@@ -1,6 +1,6 @@
 using System;
 
-namespace Filmes
+namespace ModelFilmes
 {
     public class ClasseFilme
     {
@@ -24,6 +24,7 @@ namespace Filmes
             EstoqueTotal = estoqueTotal;
             EstoqueAtual = estoqueTotal;
             Locado = 0;
+            Repositories.RepositorioGeral.addFilmes(this);
         }
         // Metodo para dizer que o filme foi locado e contabilizar
         public void filmeLocado(){
@@ -36,11 +37,8 @@ namespace Filmes
             Locado-=1;
         }
         public override string ToString(){
-            return $"Nome: {Nome} \n Data Lançamento:  {DataLancamento}");
-            Console.WriteLine($"Sinope: {Sinopse}");
-            Console.WriteLine($"Valor: R$  {Valor}");
-            Console.WriteLine($"Estoque Atual:  {EstoqueAtual}");
-            Console.WriteLine($"Quantidade de locações feitas:  {Locado}");
+            return $"Nome: {Nome} \n Data Lançamento:  {DataLancamento} \n Sinope: {Sinopse} \n Valor: R$  {Valor} \n Estoque Atual:  {EstoqueAtual}" +
+                    $"Quantidade de locações feitas:  {Locado}";
         }  
     }
 }
