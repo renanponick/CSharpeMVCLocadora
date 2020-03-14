@@ -22,14 +22,17 @@ namespace CSharpeAvaliacaoMVCLocadora
                     Console.WriteLine("4 - Visualizar Clientes");
                     if(Repositories.RepositorioGeral.getFilmes().Count > 0){
                         Console.WriteLine("5 - Criar Locações");
+                        Console.WriteLine("6 - Realizar Locação ");
                     }
                 }
+                Console.WriteLine("7 - Criar o Filme");
+                Console.WriteLine("8 - Criar o Cliente");
                 
                 Console.WriteLine("9 - Sair");
                 op = Convert.ToInt32(Console.ReadLine());
 
                 if(lib == 0){
-                    if((op != 1)&&(op !=3)&&(op !=9)){
+                    if((op != 1)&&(op !=3)&&(op !=9)&&(op !=8)&&(op !=7)){
                         op=0;
                     }
                 }
@@ -62,8 +65,30 @@ namespace CSharpeAvaliacaoMVCLocadora
                         Console.WriteLine("Locações criadas com sucesso");
                         break;
                     }
+                    case 7:{
+                        ViewFilme.addFilme();
+                        Console.WriteLine("Filme criado com sucesso");
+                        break;
+                    }
+                    case 8:{
+                        ViewCliente.addCliente();
+                        Console.WriteLine("Cliente criado com sucesso");
+                        break;
+                    }
                     case 6:{
-                        //ViewFilme.getFilmes();
+                        int idLocacao, idCliente;
+                        string retorno = ViewLocacao.addLocacao();
+                        string[] auxiliar = retorno.Split('/');
+                        idLocacao = Int32.Parse(auxiliar[0]);
+                        idCliente = Int32.Parse(auxiliar[1]);
+                        idLocacao--;
+                        int opc=1;
+                        do{
+                            ViewLocacao.addFilmeLocacao(idLocacao, idCliente);
+                            Console.WriteLine("Deseja cadastrar outro filme? 0-Não 1-Sim");
+                            opc = Convert.ToInt32(Console.ReadLine());
+                        }while(opc!=0);
+                        Console.WriteLine("Filme Cadastrado com Sucesso");
                         break;
                     }
                 } 

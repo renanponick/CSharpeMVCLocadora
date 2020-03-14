@@ -9,13 +9,13 @@ namespace ModelFilmes
         public String Nome { get; set; }
         public String DataLancamento { get; set; }
         public String Sinopse { get; set; }
-        public float Valor { get; set; }
+        public double Valor { get; set; }
         public int EstoqueTotal { get; set; }
         public int EstoqueAtual { get; set; }
         public int Locado { get; set; }
 
         // Construtor da classe
-        public ClasseFilme(int id, String nome, String dataLancamento, String sinopse, float valor, int estoqueTotal){
+        public ClasseFilme(int id, String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
             ID = id;
             Nome = nome;
             DataLancamento = dataLancamento;

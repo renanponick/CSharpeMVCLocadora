@@ -13,7 +13,7 @@ namespace ModelLocacoes
         public ClasseCliente Cliente { get; set; }
         public String DataLocacao { get; set; }
         public String DataDevolucao { get; set; }
-        public float ValorTotal { get; set; }
+        public double ValorTotal { get; set; }
         public List<ClasseFilme> Filmes = new List<ClasseFilme>();
 
         // Criando contrutor

@@ -2,14 +2,16 @@ using System;
 using ModelLocacoes;
 using Repositories;
 using System.Linq;
+using ModelClientes;
 
 namespace ControllerLocacoes{
     public class ControllerLocacao{
         public static void addLocacoes(){
+    //Para agilizar o processo fiz o cadastro automatico dentro dos controllers, porém, será separado um cadastro indivicual de forma que o view passe parametros para o controller como o recomendado.
             if(RepositorioGeral.getClientes().Count > 0){
                 //Criar locação para primeiro cliente
                 try{
-                    RepositorioGeral.getClientes().ElementAt(0).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).ID+=1, RepositorioGeral.getClientes().ElementAt(0)));
+                    RepositorioGeral.getClientes().ElementAt(0).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(0)));
                         //Locar filmes na primeira locação para o primeiro cliente
                         RepositorioGeral.getClientes().ElementAt(0).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(1));
                         RepositorioGeral.getClientes().ElementAt(0).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(3));
@@ -19,7 +21,7 @@ namespace ControllerLocacoes{
                 }
                 try{
                     //Criar locação para Segundo cliente
-                    RepositorioGeral.getClientes().ElementAt(1).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).ID+=1, RepositorioGeral.getClientes().ElementAt(1)));
+                    RepositorioGeral.getClientes().ElementAt(1).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(1)));
                         //Locar filmes na primeira locação para o primeiro cliente
                         RepositorioGeral.getClientes().ElementAt(1).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(0));
                         RepositorioGeral.getClientes().ElementAt(1).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(7));
@@ -29,13 +31,13 @@ namespace ControllerLocacoes{
                 }
                 try{    
                     //Criar locação para Terceiro cliente
-                    RepositorioGeral.getClientes().ElementAt(2).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).ID+=1, RepositorioGeral.getClientes().ElementAt(2)));
+                    RepositorioGeral.getClientes().ElementAt(2).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(2)));
                         //Locar filmes na primeira locação para o primeiro cliente
                         RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(1));
                         RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(3));
                         RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(8));
                     //Criar segunda locação para Terceiro cliente
-                    RepositorioGeral.getClientes().ElementAt(2).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).ID+=1, RepositorioGeral.getClientes().ElementAt(2)));
+                    RepositorioGeral.getClientes().ElementAt(2).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(2)));
                         //Locar filmes na primeira locação para o primeiro cliente
                         RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(1).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(6));
                         RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(1).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(5));
@@ -44,7 +46,7 @@ namespace ControllerLocacoes{
                 }
                 try{    
                     //Criar locação para Segundo cliente
-                    RepositorioGeral.getClientes().ElementAt(3).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).ID+=1, RepositorioGeral.getClientes().ElementAt(3)));
+                    RepositorioGeral.getClientes().ElementAt(3).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(3)));
                         //Locar filmes na primeira locação para o primeiro cliente
                         RepositorioGeral.getClientes().ElementAt(3).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(3));
                         RepositorioGeral.getClientes().ElementAt(3).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(4));
@@ -53,6 +55,24 @@ namespace ControllerLocacoes{
                     Console.WriteLine(e);
                 }
             }           
+        }
+        public static void addFilmeLocacao(int idCliente,int idLocacao,int idFilme){
+            if(RepositorioGeral.getClientes().Count>0){
+                ClasseCliente cliente =  RepositorioGeral.getClientes().ElementAt(idCliente);
+                Console.WriteLine("Cliente criado "+cliente.Nome);
+                if(cliente.Locacoes.Count>0){
+                    ClasseLocacao locacao = cliente.Locacoes.ElementAt(idLocacao);
+                    Console.WriteLine("Locação do cliente criada");
+                    if(RepositorioGeral.getFilmes().Count>0){
+                        locacao.adicionarFilme(RepositorioGeral.getFilmes().ElementAt(idFilme));
+                    }
+                }
+            }
+        }
+        public static string addLocacao(int idCliente){
+            int idLocacao = RepositorioGeral.getClientes().ElementAt(idCliente).Locacoes.Count+1;
+            RepositorioGeral.getClientes().ElementAt(idCliente).Locacoes.Add(new ClasseLocacao(idLocacao, RepositorioGeral.getClientes().ElementAt(idCliente)));
+            return $"{idLocacao}/{idCliente}";
         }
     }
 }
