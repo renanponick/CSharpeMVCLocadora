@@ -59,10 +59,8 @@ namespace ControllerLocacoes{
         public static void addFilmeLocacao(int idCliente,int idLocacao,int idFilme){
             if(RepositorioGeral.getClientes().Count>0){
                 ClasseCliente cliente =  RepositorioGeral.getClientes().ElementAt(idCliente);
-                Console.WriteLine("Cliente criado "+cliente.Nome);
                 if(cliente.Locacoes.Count>0){
                     ClasseLocacao locacao = cliente.Locacoes.ElementAt(idLocacao);
-                    Console.WriteLine("Locação do cliente criada");
                     if(RepositorioGeral.getFilmes().Count>0){
                         locacao.adicionarFilme(RepositorioGeral.getFilmes().ElementAt(idFilme));
                     }
@@ -71,6 +69,7 @@ namespace ControllerLocacoes{
         }
         public static string addLocacao(int idCliente){
             int idLocacao = RepositorioGeral.getClientes().ElementAt(idCliente).Locacoes.Count+1;
+            // int idLocacao = RepositorioGeral.getClientes().Find(x => x.ID.Equals(idCliente)).Locacoes.Count+1;
             RepositorioGeral.getClientes().ElementAt(idCliente).Locacoes.Add(new ClasseLocacao(idLocacao, RepositorioGeral.getClientes().ElementAt(idCliente)));
             return $"{idLocacao}/{idCliente}";
         }
