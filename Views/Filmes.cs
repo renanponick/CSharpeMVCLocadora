@@ -1,6 +1,8 @@
 using System;
 using ModelFilmes;
 using ControllerFilmes;
+using System.Collections;
+using System.Linq;
 
 namespace ViewFilmes{
     public class ViewFilme{
@@ -37,8 +39,9 @@ namespace ViewFilmes{
             }
         }
         public static void getFilmes(){
-            foreach(ClasseFilme filme in ControllerFilme.getFilmes()){
-                Console.WriteLine(filme);
+            IEnumerable funcQuery = from filmes in ControllerFilme.getFilmes() select filmes;
+             foreach (ClasseFilme filme in funcQuery) {
+                Console.Write(filme);
             }
         }
     }

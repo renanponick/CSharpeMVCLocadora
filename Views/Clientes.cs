@@ -1,6 +1,8 @@
 using System;
 using ControllerClientes;
 using ModelClientes;
+using System.Collections;
+using System.Linq;
 
 namespace ViewClientes{
     public class ViewCliente{
@@ -15,6 +17,7 @@ namespace ViewClientes{
             string nome, nascimento, cpf;
             int dias;
             try{
+
                 Console.WriteLine("Digite o Nome:");
                 nome = Console.ReadLine();
                 Console.WriteLine("Digite a data de nascimento: (dd/mm/aaaa):");
@@ -30,8 +33,9 @@ namespace ViewClientes{
             
         }
         public static void getClientes(){
-            foreach(ClasseCliente cliente in ControllerCliente.getClientes()){
-                Console.WriteLine(cliente);
+            IEnumerable funcQuery = from clientes in ControllerCliente.getClientes() select clientes;
+             foreach (ClasseCliente cliente in funcQuery) {
+                Console.Write(cliente);
             }
         }
     }

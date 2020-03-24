@@ -27,12 +27,13 @@ namespace CSharpeAvaliacaoMVCLocadora
                 }
                 Console.WriteLine("7 - Criar o Filme");
                 Console.WriteLine("8 - Criar o Cliente");
+                Console.WriteLine("9 - Consultar Locação - Só disponiel depois de ter locações realizadas");
                 
-                Console.WriteLine("9 - Sair");
+                Console.WriteLine("10 - Sair");
                 op = Convert.ToInt32(Console.ReadLine());
 
                 if(lib == 0){
-                    if((op != 1)&&(op !=3)&&(op !=9)&&(op !=8)&&(op !=7)){
+                    if((op != 1)&&(op !=3)&&(op !=8)&&(op !=7)&&(op !=10)){
                         op=0;
                     }
                 }
@@ -91,8 +92,12 @@ namespace CSharpeAvaliacaoMVCLocadora
                         Console.WriteLine("Filme Cadastrado com Sucesso");
                         break;
                     }
+                    case 9:{
+                        ViewLocacao.getLocacoes();
+                        break;
+                    }
                 } 
-            }while(op!=9);
+            }while(op!=10);
         }
     }
 }

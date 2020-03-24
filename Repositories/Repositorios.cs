@@ -10,6 +10,8 @@ namespace Repositories
         {
             static List<ClasseFilme> filmes = new List<ClasseFilme>();
             static List<ClasseCliente> clientes = new List<ClasseCliente>();
+            static List<ClasseLocacao> locacoes = new List<ClasseLocacao>();
+
             public static void addFilmes(ClasseFilme filme){
                 filmes.Add(filme);
             }
@@ -21,6 +23,12 @@ namespace Repositories
             }
             public static List<ClasseCliente> getClientes(){
                 return clientes;
+            }
+            public static void addLocacoes(ClasseLocacao locacao){
+                locacoes.Add(locacao);
+            }
+            public static List<ClasseLocacao> getLocacoes(){
+                return locacoes;
             }
         }
 }

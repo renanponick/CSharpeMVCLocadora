@@ -21,6 +21,7 @@ namespace ModelLocacoes
             ID = id;
             Cliente = cliente;
             DataLocacao = Data.ToString().Substring(0,10);
+            Repositories.RepositorioGeral.addLocacoes(this);
         }
 
         //Criando demais funções
@@ -44,6 +45,15 @@ namespace ModelLocacoes
             public void calculaData(){
                 Data.AddDays(Cliente.Dias);
                 DataDevolucao = Data.ToString().Substring(0,10);
+            }
+
+            public override string ToString(){
+                calculaData();
+                calcularPrecoFinal();
+                return  $"Id Locação: {ID}\n"+
+                        $"Valor pago R$: {ValorTotal} \n"+
+                        $"Data Locado: {DataLocacao} \n"+
+                        $"Data de Devolução: {DataDevolucao} \n";
             }
     }
 }

@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\renan.ponick\\.nuget\\packages\\": {}
+    "C:\\Users\\RenanP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\renan.ponick\\CSharpeAvaliacaoMVCLocadora\\CSharpeAvaliacaoMVCLocadora.csproj",
+      "projectUniqueName": "C:\\Users\\RenanP\\CSharpeAvaliacaoMVCLocadora\\CSharpeAvaliacaoMVCLocadora.csproj",
       "projectName": "CSharpeAvaliacaoMVCLocadora",
-      "projectPath": "C:\\Users\\renan.ponick\\CSharpeAvaliacaoMVCLocadora\\CSharpeAvaliacaoMVCLocadora.csproj",
-      "packagesPath": "C:\\Users\\renan.ponick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\renan.ponick\\CSharpeAvaliacaoMVCLocadora\\obj\\",
+      "projectPath": "C:\\Users\\RenanP\\CSharpeAvaliacaoMVCLocadora\\CSharpeAvaliacaoMVCLocadora.csproj",
+      "packagesPath": "C:\\Users\\RenanP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\RenanP\\CSharpeAvaliacaoMVCLocadora\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\renan.ponick\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\RenanP\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

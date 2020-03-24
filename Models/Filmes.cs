@@ -37,8 +37,8 @@ namespace ModelFilmes
             Locado-=1;
         }
         public override string ToString(){
-            return $"Nome: {Nome} \n Data Lançamento:  {DataLancamento} \n Sinope: {Sinopse} \n Valor: R$  {Valor} \n Estoque Atual:  {EstoqueAtual}\n " +
-                    $"Quantidade de locações feitas: {Locado}\n ";
+            return  $"Nome: {Nome} \nData Lançamento:  {DataLancamento} \nSinope: {Sinopse} \nValor: R$  {Valor} \nEstoque Atual:  {EstoqueAtual}\n" +
+                    $"Quantidade de locações feitas: {Locado}\n";
         }  
     }
 }
