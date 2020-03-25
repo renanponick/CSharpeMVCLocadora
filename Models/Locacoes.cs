@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using ModelClientes;
-using ModelFilmes;
+using Controllers;
+using Repositories;
 
-namespace ModelLocacoes
+namespace Models
 {
     public class ClasseLocacao
     {
@@ -12,48 +12,28 @@ namespace ModelLocacoes
         public int ID { get; set; }
         public ClasseCliente Cliente { get; set; }
         public String DataLocacao { get; set; }
-        public String DataDevolucao { get; set; }
         public double ValorTotal { get; set; }
         public List<ClasseFilme> Filmes = new List<ClasseFilme>();
 
         // Criando contrutor
-        public ClasseLocacao(int id, ClasseCliente cliente){
-            ID = id;
+        public ClasseLocacao(ClasseCliente cliente){
+            ID = RepositorioGeral.GetUltimoIdLocacao()+1;
             Cliente = cliente;
             DataLocacao = Data.ToString().Substring(0,10);
-            Repositories.RepositorioGeral.addLocacoes(this);
+            Repositories.RepositorioGeral.AddLocacoes(this);
         }
-
         //Criando demais funções
             //Adicionar filme
-            public void adicionarFilme(ClasseFilme filme){
-                if(filme.EstoqueAtual>1){
-                    Filmes.Add(filme);
-                    //Filme.filmeLocado();
-                    Cliente.FilmesLocados+=1;
-                }else{
-                    Console.WriteLine($"Não é possivel locar este filme, não temos em estoque.{filme.Nome}");
-                }
+            public void AdicionarFilme(ClasseFilme filme){
+                Filmes.Add(filme);
+                ControllerFilme.FilmeLocado(filme);
+                Cliente.FilmesLocados+=1;
             }
-            //Calcular o valor final da locacao
-            public void calcularPrecoFinal(){
-                foreach(ClasseFilme filme in Filmes){
-                    ValorTotal += filme.Valor;
-                }
-            }
-            // Calcular a data de devolução do filme
-            public void calculaData(){
-                Data.AddDays(Cliente.Dias);
-                DataDevolucao = Data.ToString().Substring(0,10);
-            }
-
             public override string ToString(){
-                calculaData();
-                calcularPrecoFinal();
                 return  $"Id Locação: {ID}\n"+
-                        $"Valor pago R$: {ValorTotal} \n"+
+                        $"Valor pago R$: {ControllerLocacao.CalcularPrecoFinal(this)} \n"+
                         $"Data Locado: {DataLocacao} \n"+
-                        $"Data de Devolução: {DataDevolucao} \n";
+                        $"Data de Devolução: {ControllerLocacao.CalculaData(this)} \n";
             }
     }
 }

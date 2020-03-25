@@ -1,82 +1,75 @@
 using System;
-using ModelLocacoes;
-using Repositories;
-using System.Linq;
-using ModelClientes;
 using System.Collections.Generic;
+using System.Linq;
+using Models;
+using Repositories;
 
-namespace ControllerLocacoes{
+namespace Controllers{
     public class ControllerLocacao{
-        public static void addLocacoes(){
-    //Para agilizar o processo fiz o cadastro automatico dentro dos controllers, porém, será separado um cadastro indivicual de forma que o view passe parametros para o controller como o recomendado.
-            if(RepositorioGeral.getClientes().Count > 0){
-                //Criar locação para primeiro cliente
+        public static void AddLocacoes(){
+            if(RepositorioGeral.GetClientes().Count > 0){
                 try{
-                    RepositorioGeral.getClientes().ElementAt(0).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(0).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(0)));
-                        //Locar filmes na primeira locação para o primeiro cliente
-                        RepositorioGeral.getClientes().ElementAt(0).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(1));
-                        RepositorioGeral.getClientes().ElementAt(0).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(3));
-                        RepositorioGeral.getClientes().ElementAt(0).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(5));
-                }catch(Exception e){
-                    Console.WriteLine(e);
-                }
-                try{
-                    //Criar locação para Segundo cliente
-                    RepositorioGeral.getClientes().ElementAt(1).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(1).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(1)));
-                        //Locar filmes na primeira locação para o primeiro cliente
-                        RepositorioGeral.getClientes().ElementAt(1).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(0));
-                        RepositorioGeral.getClientes().ElementAt(1).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(7));
-                        RepositorioGeral.getClientes().ElementAt(1).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(8));
-                }catch(Exception e){
-                    Console.WriteLine(e);
-                }
-                try{    
-                    //Criar locação para Terceiro cliente
-                    RepositorioGeral.getClientes().ElementAt(2).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(2).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(2)));
-                        //Locar filmes na primeira locação para o primeiro cliente
-                        RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(1));
-                        RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(3));
-                        RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(8));
-                    //Criar segunda locação para Terceiro cliente
-                    RepositorioGeral.getClientes().ElementAt(2).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(2).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(2)));
-                        //Locar filmes na primeira locação para o primeiro cliente
-                        RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(1).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(6));
-                        RepositorioGeral.getClientes().ElementAt(2).Locacoes.ElementAt(1).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(5));
-                }catch(Exception e){
-                    Console.WriteLine(e);
-                }
-                try{    
-                    //Criar locação para Segundo cliente
-                    RepositorioGeral.getClientes().ElementAt(3).Locacoes.Add(new ClasseLocacao(RepositorioGeral.getClientes().ElementAt(3).Locacoes.Count+1, RepositorioGeral.getClientes().ElementAt(3)));
-                        //Locar filmes na primeira locação para o primeiro cliente
-                        RepositorioGeral.getClientes().ElementAt(3).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(3));
-                        RepositorioGeral.getClientes().ElementAt(3).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(4));
-                        RepositorioGeral.getClientes().ElementAt(3).Locacoes.ElementAt(0).adicionarFilme(RepositorioGeral.getFilmes().ElementAt(9));
+                    ClasseLocacao locacao;
+                    locacao = new ClasseLocacao(RepositorioGeral.GetClientes().ElementAt(0));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(1));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(3));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(5));
+                    RepositorioGeral.GetClientes().ElementAt(0).Locacoes.Add(locacao);
+
+                    locacao = new ClasseLocacao(RepositorioGeral.GetClientes().ElementAt(1));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(0));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(7));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(8));
+                    RepositorioGeral.GetClientes().ElementAt(1).Locacoes.Add(locacao);
+              
+                    locacao = new ClasseLocacao(RepositorioGeral.GetClientes().ElementAt(2));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(4));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(3));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(9));
+                    RepositorioGeral.GetClientes().ElementAt(2).Locacoes.Add(locacao);
+
+                    locacao = new ClasseLocacao(RepositorioGeral.GetClientes().ElementAt(2));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(2));
+                    locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(1));
+                    RepositorioGeral.GetClientes().ElementAt(2).Locacoes.Add(locacao);
                 }catch(Exception e){
                     Console.WriteLine(e);
                 }
             }           
         }
-        public static void addFilmeLocacao(int idCliente,int idLocacao,int idFilme){
-            if(RepositorioGeral.getClientes().Count>0){
-                ClasseCliente cliente =  RepositorioGeral.getClientes().ElementAt(idCliente);
-                if(cliente.Locacoes.Count>0){
+        public static int AddLocacao(int idCliente){
+            RepositorioGeral.GetClientes().ElementAt(idCliente).Locacoes.Add(new ClasseLocacao(RepositorioGeral.GetClientes().ElementAt(idCliente)));
+            Console.WriteLine(RepositorioGeral.GetClientes().ElementAt(idCliente));
+            return RepositorioGeral.GetUltimoIdLocacao();
+        }
+        public static void AddFilmeLocacao(int idCliente,int idLocacao,int idFilme){
+            Console.WriteLine(idCliente);
+            Console.WriteLine(idLocacao);
+            Console.WriteLine(idFilme);
+            if(RepositorioGeral.GetUltimoIdCliente()>0){
+                ClasseCliente cliente =  RepositorioGeral.GetClientes().ElementAt(idCliente);
+                if(RepositorioGeral.GetUltimoIdLocacao()>0){
                     ClasseLocacao locacao = cliente.Locacoes.ElementAt(idLocacao);
-                    if(RepositorioGeral.getFilmes().Count>0){
-                        locacao.adicionarFilme(RepositorioGeral.getFilmes().ElementAt(idFilme));
+                    if(RepositorioGeral.GetUltimoIdFilme()>0){
+                        locacao.AdicionarFilme(RepositorioGeral.GetFilmes().ElementAt(idFilme));
                     }
                 }
             }
         }
-        public static string addLocacao(int idCliente){
-            int idLocacao = RepositorioGeral.getClientes().ElementAt(idCliente).Locacoes.Count+1;
-            // int idLocacao = RepositorioGeral.getClientes().Find(x => x.ID.Equals(idCliente)).Locacoes.Count+1;
-            RepositorioGeral.getClientes().ElementAt(idCliente).Locacoes.Add(new ClasseLocacao(idLocacao, RepositorioGeral.getClientes().ElementAt(idCliente)));
-            return $"{idLocacao}/{idCliente}";
+        public static List<ClasseLocacao> GetLocacoes(){
+            return Repositories.RepositorioGeral.GetLocacoes();
         }
-        public static List<ClasseLocacao> getLocacoes(){
-            return Repositories.RepositorioGeral.getLocacoes();
+        public static double CalcularPrecoFinal(ClasseLocacao locacao){
+            double valorTotal=0;
+            foreach(ClasseFilme filme in locacao.Filmes){
+                valorTotal += filme.Valor;
+            }
+            return valorTotal;
         }
+        public static String CalculaData(ClasseLocacao locacao){
+            return locacao.Data.AddDays(locacao.Cliente.Dias).ToString();
+        }
+
     }
 }
            

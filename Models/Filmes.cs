@@ -1,6 +1,7 @@
 using System;
+using Repositories;
 
-namespace ModelFilmes
+namespace Models
 {
     public class ClasseFilme
     {
@@ -15,8 +16,8 @@ namespace ModelFilmes
         public int Locado { get; set; }
 
         // Construtor da classe
-        public ClasseFilme(int id, String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
-            ID = id;
+        public ClasseFilme(String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
+            ID = RepositorioGeral.GetUltimoIdFilme()+1;
             Nome = nome;
             DataLancamento = dataLancamento;
             Sinopse = sinopse;
@@ -24,20 +25,14 @@ namespace ModelFilmes
             EstoqueTotal = estoqueTotal;
             EstoqueAtual = estoqueTotal;
             Locado = 0;
-            Repositories.RepositorioGeral.addFilmes(this);
+            Repositories.RepositorioGeral.AddFilmes(this);
         }
         // Metodo para dizer que o filme foi locado e contabilizar
-        public void filmeLocado(){
-            EstoqueAtual-=1;
-            Locado+=1;
-        }
-        // Metodo para dizer que o filme foi devolvido e contabilizar
-        public void devolverFilme(){
-            EstoqueAtual+=1;
-            Locado-=1;
-        }
         public override string ToString(){
-            return  $"Nome: {Nome} \nData Lançamento:  {DataLancamento} \nSinope: {Sinopse} \nValor: R$  {Valor} \nEstoque Atual:  {EstoqueAtual}\n" +
+            return  $"Nome: {Nome} \n"+
+                    $"Data Lançamento:  {DataLancamento} \n"+
+                    $"Sinope: {Sinopse} \n"+
+                    $"Valor: R$  {Valor} \nEstoque Atual:  {EstoqueAtual}\n"+
                     $"Quantidade de locações feitas: {Locado}\n";
         }  
     }

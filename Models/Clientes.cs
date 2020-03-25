@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using ModelLocacoes;
-using ModelFilmes;
-using System.Linq;
+using Repositories;
 
-namespace ModelClientes
+namespace Models
 {
     public class ClasseCliente
     {
@@ -16,14 +14,14 @@ namespace ModelClientes
         public int FilmesLocados { get; set; }
         public List<ClasseLocacao> Locacoes = new List<ClasseLocacao>();
 
-        public ClasseCliente(int id, String nome, String dataNascimento, String cpf, int dias){
-            ID = id;
+        public ClasseCliente(String nome, String dataNascimento, String cpf, int dias){
+            ID = RepositorioGeral.GetUltimoIdCliente()+1;
             Nome = nome;
             DataNascimento = dataNascimento;
             Cpf = cpf;
             Dias = dias;
             FilmesLocados = 0;
-            Repositories.RepositorioGeral.addClientes(this);
+            Repositories.RepositorioGeral.AddClientes(this);
         }
         public override string ToString(){
              String retorno = $"Id: {ID}\n"+
@@ -41,13 +39,9 @@ namespace ModelClientes
                     foreach(ClasseFilme filme in locacao.Filmes){
                             retorno += filme.Nome+"\n";
                     }
-                    locacao.calculaData();
-                    locacao.calcularPrecoFinal();
-                        retorno += $"Valor pago R$: {locacao.ValorTotal} \n"+
-                                    $"Data Locado: {locacao.DataLocacao} \n"+
-                                    $"Data de Devolução: {locacao.DataDevolucao} \n";
+                    retorno += locacao.ToString()+"\n";
                 }
-                    retorno += $"\nQuantidade de locações realizadas foi: {aux} \n----------------------------------------------------------\n";
+                retorno += $"\nQuantidade de locações realizadas foi: {aux} \n----------------------------------------------------------\n";
             }   
             return retorno;
         }

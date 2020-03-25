@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
-using ModelClientes;
-using ModelFilmes;
-using ModelLocacoes;
+using Models;
+using System.Linq;
 
 namespace Repositories
 {
@@ -12,23 +10,50 @@ namespace Repositories
             static List<ClasseCliente> clientes = new List<ClasseCliente>();
             static List<ClasseLocacao> locacoes = new List<ClasseLocacao>();
 
-            public static void addFilmes(ClasseFilme filme){
+            public static void AddFilmes(ClasseFilme filme){
                 filmes.Add(filme);
             }
-            public static List<ClasseFilme> getFilmes(){
+            public static List<ClasseFilme> GetFilmes(){
                 return filmes;
             }
-             public static void addClientes(ClasseCliente cliente){
+             public static void AddClientes(ClasseCliente cliente){
                 clientes.Add(cliente);
             }
-            public static List<ClasseCliente> getClientes(){
+            public static List<ClasseCliente> GetClientes(){
                 return clientes;
             }
-            public static void addLocacoes(ClasseLocacao locacao){
+            public static void AddLocacoes(ClasseLocacao locacao){
                 locacoes.Add(locacao);
             }
-            public static List<ClasseLocacao> getLocacoes(){
+            public static List<ClasseLocacao> GetLocacoes(){
                 return locacoes;
+            }
+            public static int GetUltimoIdCliente(){
+                int id;
+                try{
+                    id = (from clientes in clientes select clientes.ID).Max();
+                }catch{
+                    id = 0;
+                }
+                return id;
+            }
+            public static int GetUltimoIdFilme(){
+                int id;
+                try{
+                    id = (from filmes in filmes select filmes.ID).Max();
+                }catch{
+                    id = 0;
+                }
+                return id;
+            }
+            public static int GetUltimoIdLocacao(){
+                 int id;
+                try{
+                    id = (from locacoes in locacoes select locacoes.ID).Max();
+                }catch{
+                    id = 0;
+                }
+                return id;
             }
         }
 }
