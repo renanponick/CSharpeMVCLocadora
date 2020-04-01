@@ -1,28 +1,45 @@
 using System;
 using System.Collections.Generic;
 using Repositories;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
-    public class ClasseCliente
+    public class Cliente
     {
+        [Key]
         public int ID { get; set; }
+        [Required]
         public String Nome { get; set; }
         public String DataNascimento { get; set; }
+        [Required]
         public String Cpf { get; set; }
         public int Dias { get; set; }
         public int FilmesLocados { get; set; }
-        public List<ClasseLocacao> Locacoes = new List<ClasseLocacao>();
+       // [ForeignKey("Locacao")]
+       // [Column(Order = 1)]
+        public List<Locacao> Locacoes = new List<Locacao>();
 
-        public ClasseCliente(String nome, String dataNascimento, String cpf, int dias){
-            ID = RepositorioGeral.GetUltimoIdCliente()+1;
+        public Cliente(){}
+
+        public Cliente(String nome, String dataNascimento, String cpf, int dias){
+            ID = RepositorioCliente.GetUltimoIdCliente()+1;
             Nome = nome;
             DataNascimento = dataNascimento;
             Cpf = cpf;
             Dias = dias;
             FilmesLocados = 0;
-            Repositories.RepositorioGeral.AddClientes(this);
+            Context db = new Context();
+            db.Clientes.Add(this);
+            db.SaveChanges();
+            RepositorioCliente.AddClientes(this);
         }
+
+        public void InserirLocacao(Locacao locacao) {
+            Locacoes.Add(locacao);
+        }
+
         public override string ToString(){
              String retorno = $"Id: {ID}\n"+
                                 $"Nome: {Nome}\n"+
@@ -33,10 +50,10 @@ namespace Models
                            
             if(Locacoes.Count>0){
                 int aux = 0 ;
-                foreach(ClasseLocacao locacao in Locacoes){
+                foreach(Locacao locacao in Locacoes){
                     aux ++;
                         retorno += $" ----------- Locação - {aux} -------------\n";
-                    foreach(ClasseFilme filme in locacao.Filmes){
+                    foreach(Filme filme in locacao.Filmes){
                             retorno += filme.Nome+"\n";
                     }
                     retorno += locacao.ToString()+"\n";

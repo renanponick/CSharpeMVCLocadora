@@ -14,13 +14,13 @@ namespace ViewLocacoes{
             int id = Convert.ToInt32 (Console.ReadLine());
             IEnumerable clienteQuerry = from cliente in ControllerCliente.GetClientes() 
                                          where cliente.ID == id select cliente;
-            foreach (ClasseCliente cliente in clienteQuerry){ 
+            foreach (Cliente cliente in clienteQuerry){ 
                 Console.WriteLine(cliente.Nome); 
                 Console.WriteLine(" ------ Locação Realizada -----");
-                foreach (ClasseLocacao locacao in cliente.Locacoes){ 
+                foreach (Locacao locacao in cliente.Locacoes){ 
                     Console.WriteLine(locacao); 
                     Console.WriteLine("------ Filmes locados -----");
-                    foreach (ClasseFilme filme in locacao.Filmes){ 
+                    foreach (Filme filme in locacao.Filmes){ 
                         Console.WriteLine(filme);
                     }
                     Console.WriteLine("------ Fim Filmes -----");
@@ -31,7 +31,7 @@ namespace ViewLocacoes{
         public static void GetLocacoesIndividual(){
             Console.WriteLine("Digite o ID da Locacao: ");
             int id = Convert.ToInt32 (Console.ReadLine());
-            ClasseCliente clienteQuerry = (from cliente in ControllerCliente.GetClientes() 
+            Cliente clienteQuerry = (from cliente in ControllerCliente.GetClientes() 
                                          where cliente.ID == id select cliente).First();
              Console.WriteLine(clienteQuerry); 
         }

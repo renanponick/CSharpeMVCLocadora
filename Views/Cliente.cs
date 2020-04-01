@@ -30,7 +30,7 @@ namespace ViewClientes{
         }
         public static void GetClientes(){
             IEnumerable funcQuery = from clientes in ControllerCliente.GetClientes() select clientes;
-             foreach (ClasseCliente cliente in funcQuery) {
+             foreach (Cliente cliente in funcQuery) {
                 Console.Write(cliente);
             }
         }

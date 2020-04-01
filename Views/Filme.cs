@@ -37,7 +37,7 @@ namespace ViewFilmes{
         }
         public static void GetFilmes(){
             IEnumerable funcQuery = from filmes in ControllerFilme.GetFilmes() select filmes;
-             foreach (ClasseFilme filme in funcQuery) {
+             foreach (Filme filme in funcQuery) {
                 Console.Write(filme);
             }
         }
