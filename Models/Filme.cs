@@ -1,6 +1,7 @@
 using System;
 using Repositories;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -8,7 +9,7 @@ namespace Models
     {
         // Criando os atributos com o gets e sets
         [Key]
-        public int ID { get; set; }
+        public int IdFilme { get; set; }
         [Required]
         public String Nome { get; set; }
         public String DataLancamento { get; set; }
@@ -20,9 +21,17 @@ namespace Models
 
         public Filme(){}
 
+        public static List<Filme> GetFilmes(){
+            return RepositorioFilme.GetFilmes();
+        }
+
+        public static Filme GetFilmes(int idFilme){
+            return RepositorioFilme.GetFilmes().Find(filme => filme.IdFilme == idFilme);
+        }
+
         // Construtor da classe
         public Filme(String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
-            ID = RepositorioFilme.GetUltimoIdFilme()+1;
+            IdFilme = RepositorioFilme.GetUltimoIdFilme()+1;
             Nome = nome;
             DataLancamento = dataLancamento;
             Sinopse = sinopse;
@@ -37,6 +46,7 @@ namespace Models
             
             RepositorioFilme.AddFilmes(this);
         }
+
         // Metodo para dizer que o filme foi locado e contabilizar
         public override string ToString(){
             return  $"Nome: {Nome} \n"+

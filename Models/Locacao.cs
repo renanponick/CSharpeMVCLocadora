@@ -12,7 +12,7 @@ namespace Models
         // Criando atributos e seus getters e setters
        
         [Key]
-        public int ID { get; set; }
+        public int IdLocacao { get; set; }
        // [ForeignKey("Cliente")]
       //  [Column(Order = 1)]
         public Cliente Cliente { get; set; }
@@ -26,7 +26,7 @@ namespace Models
 
         // Criando contrutor
         public Locacao (Cliente cliente, DateTime dtLocacao) {
-            ID = RepositorioLocacao.GetUltimoIdLocacao()+1;
+            IdLocacao = RepositorioLocacao.GetUltimoIdLocacao()+1;
             Cliente = cliente;
             DataLocacao = dtLocacao;
             Filmes = new List<Filme>();
@@ -38,6 +38,9 @@ namespace Models
 
             RepositorioLocacao.AddLocacoes(this);
         }
+        public static Locacao GetLocacao(int idLocacao){           
+            return RepositorioLocacao.GetLocacoes().Find(locacao => locacao.IdLocacao == idLocacao);
+        }
         //Criando demais funções
             //Adicionar filme
             public void AdicionarFilme(Filme filme){
@@ -46,7 +49,7 @@ namespace Models
                 Cliente.FilmesLocados+=1;
             }
             public override string ToString(){
-                return  $"Id Locação: {ID}\n"+
+                return  $"Id Locação: {IdLocacao}\n"+
                         $"Valor pago R$: {ControllerLocacao.CalcularPrecoFinal(this)} \n"+
                         $"Data Locado: {DataLocacao} \n"+
                         $"Data de Devolução: {ControllerLocacao.CalculaData(this)} \n";

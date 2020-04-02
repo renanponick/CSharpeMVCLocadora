@@ -59,8 +59,8 @@ namespace Controllers{
                 }
             }
         }
-        public static List<Locacao> GetLocacoes(){
-            return RepositorioLocacao.GetLocacoes();
+        public static Locacao GetLocacao(int idLocacao){
+            return Locacao.GetLocacao(idLocacao);
         }
         public static double CalcularPrecoFinal(Locacao locacao){
             double valorTotal=0;

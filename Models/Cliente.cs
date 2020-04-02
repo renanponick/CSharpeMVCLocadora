@@ -9,7 +9,7 @@ namespace Models
     public class Cliente
     {
         [Key]
-        public int ID { get; set; }
+        public int IdCliente { get; set; }
         [Required]
         public String Nome { get; set; }
         public String DataNascimento { get; set; }
@@ -24,7 +24,7 @@ namespace Models
         public Cliente(){}
 
         public Cliente(String nome, String dataNascimento, String cpf, int dias){
-            ID = RepositorioCliente.GetUltimoIdCliente()+1;
+            IdCliente = RepositorioCliente.GetUltimoIdCliente()+1;
             Nome = nome;
             DataNascimento = dataNascimento;
             Cpf = cpf;
@@ -40,8 +40,16 @@ namespace Models
             Locacoes.Add(locacao);
         }
 
+        public static List<Cliente> GetClientes(){
+            return RepositorioCliente.GetClientes();
+        }
+
+        public static Cliente GetCliente(int idCliente){
+            return RepositorioCliente.GetClientes().Find(cliente => cliente.IdCliente == idCliente);
+        }
+
         public override string ToString(){
-             String retorno = $"Id: {ID}\n"+
+             String retorno = $"Id: {IdCliente}\n"+
                                 $"Nome: {Nome}\n"+
                                 $"Nascido em: {DataNascimento}\n"+
                                 $"Cpf : {Cpf}\n"+

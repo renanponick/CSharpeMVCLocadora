@@ -16,7 +16,7 @@ namespace Repositories
             public static int GetUltimoIdFilme(){
                 int id;
                 try{
-                    id = (from filmes in Filmes select filmes.ID).Max();
+                    id = (from filmes in Filmes select filmes.IdFilme).Max();
                 }catch{
                     id = 0;
                 }

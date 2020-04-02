@@ -13,7 +13,7 @@ namespace ViewLocacoes{
             Console.WriteLine("Digite o ID do cliente: ");
             int id = Convert.ToInt32 (Console.ReadLine());
             IEnumerable clienteQuerry = from cliente in ControllerCliente.GetClientes() 
-                                         where cliente.ID == id select cliente;
+                                         where cliente.IdCliente == id select cliente;
             foreach (Cliente cliente in clienteQuerry){ 
                 Console.WriteLine(cliente.Nome); 
                 Console.WriteLine(" ------ Locação Realizada -----");
@@ -32,7 +32,7 @@ namespace ViewLocacoes{
             Console.WriteLine("Digite o ID da Locacao: ");
             int id = Convert.ToInt32 (Console.ReadLine());
             Cliente clienteQuerry = (from cliente in ControllerCliente.GetClientes() 
-                                         where cliente.ID == id select cliente).First();
+                                         where cliente.IdCliente == id select cliente).First();
              Console.WriteLine(clienteQuerry); 
         }
         public static void AddLocacao(){

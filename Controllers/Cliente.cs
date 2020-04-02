@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Models;
-using Repositories;
 
 namespace Controllers{
     public class ControllerCliente{
@@ -13,7 +12,10 @@ namespace Controllers{
             }
         }
         public static List<Cliente> GetClientes(){
-            return RepositorioCliente.GetClientes();
+            return Cliente.GetClientes();
+        }
+        public static Cliente GetCliente(int idCliente){
+            return Cliente.GetCliente(idCliente);
         }
     }
 }

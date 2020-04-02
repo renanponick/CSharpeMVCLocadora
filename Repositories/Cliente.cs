@@ -16,7 +16,7 @@ namespace Repositories
             public static int GetUltimoIdCliente(){
                 int id;
                 try{
-                    id = (from clientes in Clientes select clientes.ID).Max();
+                    id = (from clientes in Clientes select clientes.IdCliente).Max();
                 }catch{
                     id = 0;
                 }

@@ -13,7 +13,12 @@ namespace Controllers{
             }
         }
         public static List<Filme> GetFilmes(){
-            return RepositorioFilme.GetFilmes();
+            return Filme.GetFilmes();
+        }
+
+        public static Filme GetFilmes(int idFilme){
+            //muda retornos
+            return Filme.GetFilmes(idFilme);
         }
 
         // ----------- funções de manipulação de dados ------------- //

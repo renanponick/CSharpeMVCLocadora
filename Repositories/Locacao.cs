@@ -6,7 +6,7 @@ namespace Repositories
 {
     public class RepositorioLocacao
         {
-            static List<Locacao> Locacoes = new List<Locacao>();
+            private static List<Locacao> Locacoes = new List<Locacao>();
             public static void AddLocacoes(Locacao locacao){
                 Locacoes.Add(locacao);
             }
@@ -16,7 +16,7 @@ namespace Repositories
             public static int GetUltimoIdLocacao(){
                  int id;
                 try{
-                    id = (from locacoes in Locacoes select locacoes.ID).Max();
+                    id = (from locacoes in Locacoes select locacoes.IdLocacao).Max();
                 }catch{
                     id = 0;
                 }
