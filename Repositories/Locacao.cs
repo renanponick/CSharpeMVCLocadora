@@ -16,7 +16,7 @@ namespace Repositories
             public static int GetUltimoIdLocacao(){
                  int id;
                 try{
-                    id = (from locacoes in Locacoes select locacoes.IdLocacao).Max();
+                    id = (from locacoes in Locacoes select locacoes.LocacaoId).Max();
                 }catch{
                     id = 0;
                 }

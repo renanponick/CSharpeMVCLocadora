@@ -9,19 +9,19 @@ using Repositories;
 namespace CSharpeAvaliacaoMVCLocadora.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200401013207_InitialDB")]
+    [Migration("20200406232216_InitialDB")]
     partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Models.Cliente", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -42,14 +42,14 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("ID");
+                    b.HasKey("ClienteId");
 
                     b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Models.Filme", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("FilmeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -75,18 +75,18 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                     b.Property<double>("Valor")
                         .HasColumnType("double");
 
-                    b.HasKey("ID");
+                    b.HasKey("FilmeId");
 
                     b.ToTable("Filmes");
                 });
 
             modelBuilder.Entity("Models.Locacao", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("LocacaoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienteID")
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataLocacao")
@@ -95,9 +95,9 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                     b.Property<double>("ValorTotal")
                         .HasColumnType("double");
 
-                    b.HasKey("ID");
+                    b.HasKey("LocacaoId");
 
-                    b.HasIndex("ClienteID");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Locacoes");
                 });
@@ -106,7 +106,7 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                 {
                     b.HasOne("Models.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ClienteID");
+                        .HasForeignKey("ClienteId");
                 });
 #pragma warning restore 612, 618
         }

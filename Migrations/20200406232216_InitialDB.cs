@@ -12,7 +12,7 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                 name: "Clientes",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ClienteId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: false),
                     DataNascimento = table.Column<string>(nullable: true),
@@ -22,14 +22,14 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.ID);
+                    table.PrimaryKey("PK_Clientes", x => x.ClienteId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Filmes",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    FilmeId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: false),
                     DataLancamento = table.Column<string>(nullable: true),
@@ -41,34 +41,34 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Filmes", x => x.ID);
+                    table.PrimaryKey("PK_Filmes", x => x.FilmeId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Locacoes",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    LocacaoId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClienteID = table.Column<int>(nullable: true),
+                    ClienteId = table.Column<int>(nullable: true),
                     DataLocacao = table.Column<DateTime>(nullable: false),
                     ValorTotal = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Locacoes", x => x.ID);
+                    table.PrimaryKey("PK_Locacoes", x => x.LocacaoId);
                     table.ForeignKey(
-                        name: "FK_Locacoes_Clientes_ClienteID",
-                        column: x => x.ClienteID,
+                        name: "FK_Locacoes_Clientes_ClienteId",
+                        column: x => x.ClienteId,
                         principalTable: "Clientes",
-                        principalColumn: "ID",
+                        principalColumn: "ClienteId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locacoes_ClienteID",
+                name: "IX_Locacoes_ClienteId",
                 table: "Locacoes",
-                column: "ClienteID");
+                column: "ClienteId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

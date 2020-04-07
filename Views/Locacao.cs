@@ -13,7 +13,7 @@ namespace ViewLocacoes{
             Console.WriteLine("Digite o ID do cliente: ");
             int id = Convert.ToInt32 (Console.ReadLine());
             IEnumerable clienteQuerry = from cliente in ControllerCliente.GetClientes() 
-                                         where cliente.IdCliente == id select cliente;
+                                         where cliente.ClienteId == id select cliente;
             foreach (Cliente cliente in clienteQuerry){ 
                 Console.WriteLine(cliente.Nome); 
                 Console.WriteLine(" ------ Locação Realizada -----");
@@ -32,27 +32,27 @@ namespace ViewLocacoes{
             Console.WriteLine("Digite o ID da Locacao: ");
             int id = Convert.ToInt32 (Console.ReadLine());
             Cliente clienteQuerry = (from cliente in ControllerCliente.GetClientes() 
-                                         where cliente.IdCliente == id select cliente).First();
+                                         where cliente.ClienteId == id select cliente).First();
              Console.WriteLine(clienteQuerry); 
         }
         public static void AddLocacao(){
-            int idLocacao, idCliente;
+            int idLocacao, ClienteId;
             Console.WriteLine("Digite o id do cliente:");
-            idCliente = Convert.ToInt32(Console.ReadLine());
-            idLocacao = ControllerLocacao.AddLocacao(idCliente);
+            ClienteId = Convert.ToInt32(Console.ReadLine());
+            idLocacao = ControllerLocacao.AddLocacao(ClienteId);
             int opc=1;
             do{
-                ViewLocacao.AddFilmeLocacao(idLocacao, idCliente);
+                ViewLocacao.AddFilmeLocacao(idLocacao, ClienteId);
                 Console.WriteLine("Deseja cadastrar outro filme? 0-Não 1-Sim");
                 opc = Convert.ToInt32(Console.ReadLine());
             }while(opc!=0);
             Console.WriteLine("Filme Cadastrado com Sucesso");
         }
-        public static void AddFilmeLocacao(int idLocacao, int idCliente){
+        public static void AddFilmeLocacao(int idLocacao, int clienteId){
             int idFilme;
             Console.WriteLine("Digite o id do filme:");
             idFilme = Convert.ToInt32(Console.ReadLine());
-            ControllerLocacao.AddFilmeLocacao(idCliente, idLocacao, idFilme);
+            ControllerLocacao.AddFilmeLocacao(clienteId, idLocacao, idFilme);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Models
     {
         // Criando os atributos com o gets e sets
         [Key]
-        public int IdFilme { get; set; }
+        public int FilmeId { get; set; }
         [Required]
         public String Nome { get; set; }
         public String DataLancamento { get; set; }
@@ -25,13 +25,13 @@ namespace Models
             return RepositorioFilme.GetFilmes();
         }
 
-        public static Filme GetFilmes(int idFilme){
-            return RepositorioFilme.GetFilmes().Find(filme => filme.IdFilme == idFilme);
+        public static Filme GetFilmes(int filmeId){
+            return RepositorioFilme.GetFilmes().Find(filme => filme.FilmeId == filmeId);
         }
 
         // Construtor da classe
         public Filme(String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
-            IdFilme = RepositorioFilme.GetUltimoIdFilme()+1;
+            FilmeId = RepositorioFilme.GetUltimoIdFilme()+1;
             Nome = nome;
             DataLancamento = dataLancamento;
             Sinopse = sinopse;
