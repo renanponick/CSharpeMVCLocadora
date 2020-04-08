@@ -19,7 +19,7 @@ namespace CSharpeAvaliacaoMVCLocadora
                 Console.WriteLine("6 - Realizar Locação <- Falha, vou tentar corrigir se der tempo");
                 Console.WriteLine("7 - Criar o Filme");
                 Console.WriteLine("8 - Criar o Cliente");
-                Console.WriteLine("9 - Consultar Locação Por Cliente- Só disponiel depois de ter locações realizadas");
+                //Console.WriteLine("9 - Consultar Locação Por Cliente- Só disponiel depois de ter locações realizadas");
                 Console.WriteLine("10 - Consultar Locação Individual - Só disponiel depois de ter locações realizadas");
                 Console.WriteLine("11 - Sair");
                 op = Convert.ToInt32(Console.ReadLine());
@@ -66,7 +66,7 @@ namespace CSharpeAvaliacaoMVCLocadora
                         break;
                     }
                     case 9:{
-                        ViewLocacao.GetLocacoesCliente();
+                        //ViewLocacao.GetLocacoesCliente();
                         break;
                     }
                     case 10:{

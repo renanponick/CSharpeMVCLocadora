@@ -2,13 +2,13 @@ using System;
 using Repositories;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Models
 {
     public class Filme
     {
-        // Criando os atributos com o gets e sets
-        [Key]
         public int FilmeId { get; set; }
         [Required]
         public String Nome { get; set; }
@@ -17,6 +17,9 @@ namespace Models
         public double Valor { get; set; }
         public int EstoqueTotal { get; set; }
         public int EstoqueAtual { get; set; }
+        [ForeignKey("Locacao")]
+        [Column(Order = 1)]
+        public int LocacaoId { get; set; }
         public int Locado { get; set; }
 
         public Filme(){}
@@ -25,7 +28,7 @@ namespace Models
             return RepositorioFilme.GetFilmes();
         }
 
-        public static Filme GetFilmes(int filmeId){
+        public static Filme GetFilme(int filmeId){
             return RepositorioFilme.GetFilmes().Find(filme => filme.FilmeId == filmeId);
         }
 

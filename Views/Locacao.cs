@@ -1,32 +1,12 @@
 using System;
-using System.Collections;
-using System.Linq;
 using Controllers;
 using Models;
+using System.Linq;
 
 namespace ViewLocacoes{
     public class ViewLocacao{
         public static void AddLocacoes(){
             ControllerLocacao.AddLocacoes();
-        }
-        public static void GetLocacoesCliente(){
-            Console.WriteLine("Digite o ID do cliente: ");
-            int id = Convert.ToInt32 (Console.ReadLine());
-            IEnumerable clienteQuerry = from cliente in ControllerCliente.GetClientes() 
-                                         where cliente.ClienteId == id select cliente;
-            foreach (Cliente cliente in clienteQuerry){ 
-                Console.WriteLine(cliente.Nome); 
-                Console.WriteLine(" ------ Locação Realizada -----");
-                foreach (Locacao locacao in cliente.Locacoes){ 
-                    Console.WriteLine(locacao); 
-                    Console.WriteLine("------ Filmes locados -----");
-                    foreach (Filme filme in locacao.Filmes){ 
-                        Console.WriteLine(filme);
-                    }
-                    Console.WriteLine("------ Fim Filmes -----");
-                }
-                 Console.WriteLine(" ------ Fim Locação  -----");
-            }
         }
         public static void GetLocacoesIndividual(){
             Console.WriteLine("Digite o ID da Locacao: ");

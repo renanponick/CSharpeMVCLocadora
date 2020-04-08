@@ -18,7 +18,7 @@ namespace Controllers{
 
         public static Filme GetFilmes(int filmeId){
             //muda retornos
-            return Filme.GetFilmes(filmeId);
+            return Filme.GetFilme(filmeId);
         }
 
         // ----------- funções de manipulação de dados ------------- //

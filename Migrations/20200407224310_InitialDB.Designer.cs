@@ -9,7 +9,7 @@ using Repositories;
 namespace CSharpeAvaliacaoMVCLocadora.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200406232216_InitialDB")]
+    [Migration("20200407224310_InitialDB")]
     partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,9 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                     b.Property<int>("Locado")
                         .HasColumnType("int");
 
+                    b.Property<int>("LocadoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -80,13 +83,34 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                     b.ToTable("Filmes");
                 });
 
+            modelBuilder.Entity("Models.FilmeLocacao", b =>
+                {
+                    b.Property<int>("FilmeLocacaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FilmeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocacaoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FilmeLocacaoId");
+
+                    b.HasIndex("FilmeId");
+
+                    b.HasIndex("LocacaoId");
+
+                    b.ToTable("FilmesLocacoes");
+                });
+
             modelBuilder.Entity("Models.Locacao", b =>
                 {
                     b.Property<int>("LocacaoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienteId")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataLocacao")
@@ -102,11 +126,28 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                     b.ToTable("Locacoes");
                 });
 
+            modelBuilder.Entity("Models.FilmeLocacao", b =>
+                {
+                    b.HasOne("Models.Filme", "Filme")
+                        .WithMany()
+                        .HasForeignKey("FilmeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Locacao", "Locacao")
+                        .WithMany()
+                        .HasForeignKey("LocacaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Models.Locacao", b =>
                 {
                     b.HasOne("Models.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ClienteId");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

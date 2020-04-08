@@ -16,24 +16,24 @@ namespace Controllers{
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(1));
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(3));
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(5));
-                    RepositorioCliente.GetClientes().ElementAt(0).Locacoes.Add(locacao);
+                    RepositorioCliente.GetClientes().ElementAt(0).InserirLocacao(locacao);
 
                     locacao = new Locacao(RepositorioCliente.GetClientes().ElementAt(1),data);
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(0));
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(7));
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(8));
-                    RepositorioCliente.GetClientes().ElementAt(1).Locacoes.Add(locacao);
+                    RepositorioCliente.GetClientes().ElementAt(1).InserirLocacao(locacao);
               
                     locacao = new Locacao(RepositorioCliente.GetClientes().ElementAt(2),data);
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(4));
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(3));
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(9));
-                    RepositorioCliente.GetClientes().ElementAt(2).Locacoes.Add(locacao);
+                    RepositorioCliente.GetClientes().ElementAt(2).InserirLocacao(locacao);
 
                     locacao = new Locacao(RepositorioCliente.GetClientes().ElementAt(2),data);
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(2));
                     locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(1));
-                    RepositorioCliente.GetClientes().ElementAt(2).Locacoes.Add(locacao);
+                    RepositorioCliente.GetClientes().ElementAt(2).InserirLocacao(locacao);
                 }catch(Exception e){
                     Console.WriteLine(e);
                 }
@@ -41,7 +41,7 @@ namespace Controllers{
         }
         public static int AddLocacao(int idCliente){
             DateTime data = DateTime.Today;
-            RepositorioCliente.GetClientes().ElementAt(idCliente).Locacoes.Add(new Locacao(RepositorioCliente.GetClientes().ElementAt(idCliente),data));
+            RepositorioCliente.GetClientes().ElementAt(idCliente).InserirLocacao(new Locacao(RepositorioCliente.GetClientes().ElementAt(idCliente),data));
             Console.WriteLine(RepositorioCliente.GetClientes().ElementAt(idCliente));
             return RepositorioLocacao.GetUltimoIdLocacao();
         }
@@ -52,7 +52,7 @@ namespace Controllers{
             if(RepositorioCliente.GetUltimoIdCliente()>0){
                 Cliente cliente =  RepositorioCliente.GetClientes().ElementAt(idCliente);
                 if(RepositorioLocacao.GetUltimoIdLocacao()>0){
-                    Locacao locacao = cliente.Locacoes.ElementAt(idLocacao);
+                    Locacao locacao = cliente.GetLocacoes(cliente.ClienteId).ElementAt(idLocacao);
                     if(RepositorioFilme.GetUltimoIdFilme()>0){
                         locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(idFilme));
                     }
@@ -64,7 +64,8 @@ namespace Controllers{
         }
         public static double CalcularPrecoFinal(Locacao locacao){
             double valorTotal=0;
-            foreach(Filme filme in locacao.Filmes){
+            List<Filme> filmes = locacao.GetFilmes(locacao.LocacaoId);
+            foreach(Filme filme in filmes){
                 valorTotal += filme.Valor;
             }
             return valorTotal;
