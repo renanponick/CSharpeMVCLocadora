@@ -37,6 +37,7 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                     Valor = table.Column<double>(nullable: false),
                     EstoqueTotal = table.Column<int>(nullable: false),
                     EstoqueAtual = table.Column<int>(nullable: false),
+                    LocadoId = table.Column<int>(nullable: false),
                     Locado = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -50,7 +51,7 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                 {
                     LocacaoId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClienteId = table.Column<int>(nullable: true),
+                    ClienteId = table.Column<int>(nullable: false),
                     DataLocacao = table.Column<DateTime>(nullable: false),
                     ValorTotal = table.Column<double>(nullable: false)
                 },
@@ -62,8 +63,44 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
                         column: x => x.ClienteId,
                         principalTable: "Clientes",
                         principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "FilmesLocacoes",
+                columns: table => new
+                {
+                    FilmeLocacaoId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FilmeId = table.Column<int>(nullable: false),
+                    LocacaoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FilmesLocacoes", x => x.FilmeLocacaoId);
+                    table.ForeignKey(
+                        name: "FK_FilmesLocacoes_Filmes_FilmeId",
+                        column: x => x.FilmeId,
+                        principalTable: "Filmes",
+                        principalColumn: "FilmeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FilmesLocacoes_Locacoes_LocacaoId",
+                        column: x => x.LocacaoId,
+                        principalTable: "Locacoes",
+                        principalColumn: "LocacaoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FilmesLocacoes_FilmeId",
+                table: "FilmesLocacoes",
+                column: "FilmeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FilmesLocacoes_LocacaoId",
+                table: "FilmesLocacoes",
+                column: "LocacaoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Locacoes_ClienteId",
@@ -73,6 +110,9 @@ namespace CSharpeAvaliacaoMVCLocadora.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "FilmesLocacoes");
+
             migrationBuilder.DropTable(
                 name: "Filmes");
 

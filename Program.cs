@@ -11,70 +11,67 @@ namespace CSharpeAvaliacaoMVCLocadora
             int op=0;
             do{
                 Console.WriteLine("\n ----------------------- BlockBuster ---------------------------- \n");
-                Console.WriteLine("1 - Criar todos os Filmes");
-                Console.WriteLine("2 - Visualizar Filmes");
-                Console.WriteLine("3 - Criar todos os Clientes");
-                Console.WriteLine("4 - Visualizar Clientes");
-                Console.WriteLine("5 - Criar Locações");
-                Console.WriteLine("6 - Realizar Locação <- Falha, vou tentar corrigir se der tempo");
-                Console.WriteLine("7 - Criar o Filme");
-                Console.WriteLine("8 - Criar o Cliente");
-                Console.WriteLine("9 - Consultar Locação Por Cliente- Só disponiel depois de ter locações realizadas");
-                Console.WriteLine("10 - Consultar Locação Individual - Só disponiel depois de ter locações realizadas");
-                Console.WriteLine("11 - Sair");
+                Console.WriteLine("0 - Importar Dados");
+                Console.WriteLine("1 - Adicionar Filme");
+                Console.WriteLine("2 - Listar Filmes");
+                Console.WriteLine("3 - Consultar Filme");
+                Console.WriteLine("4 - Adicionar Cliente");
+                Console.WriteLine("5 - Listar Clientes");
+                Console.WriteLine("6 - Consultar Clientes");
+                Console.WriteLine("7 - Criar Locações");
+                Console.WriteLine("8 - Consultar Locações");
+                Console.WriteLine("9 - Sair");
                 op = Convert.ToInt32(Console.ReadLine());
                 switch(op){
                     case 0:{
-                        Console.WriteLine("Ação Negada");
+                        ViewFilme.AddTodosFilmes();
+                        ViewCliente.AddTodosClientes();
+                        ViewLocacao.AddTodasLocacoes();
                         break;
                     }
                     case 1:{
-                        ViewFilme.AddTodosFilmes();
-                        Console.WriteLine("Filmes criados com sucesso");
+                        // Adiciona um filme - Ok
+                        ViewFilme.AddFilme();
                         break;
                     }
                     case 2:{
+                        // Lista todos os filmes - Ok
                         ViewFilme.GetFilmes();
                         break;
                     }
                     case 3:{
-                        ViewCliente.AddTodosClientes();
-                         Console.WriteLine("Clientes criados com sucesso");
+                        // Mostra UM filme através do ID - Ok
+                        ViewFilme.GetFilmes();
                         break;
                     }
                     case 4:{
-                        ViewCliente.GetClientes();
+                        // Adiciona um Cliente - 
+                        ViewCliente.AddCliente();
                         break;
                     }
                     case 5:{
-                        ViewLocacao.AddLocacoes();
-                        Console.WriteLine("Locações criadas com sucesso");
-                        break;
-                    }
-                    case 7:{
-                        ViewFilme.AddFilme();
-                        Console.WriteLine("Filme criado com sucesso");
-                        break;
-                    }
-                    case 8:{
-                        ViewCliente.AddCliente();
-                        Console.WriteLine("Cliente criado com sucesso");
+                        // Lista todos os clientes - Ok
+                        ViewCliente.GetClientes();
                         break;
                     }
                     case 6:{
-                        ViewLocacao.AddLocacao();
+                        // Mostra UM  cliente através do ID -
+                        ViewCliente.GetCliente();
                         break;
                     }
-                    case 9:{
-                        ViewLocacao.GetLocacoesCliente();
+                    case 7:{
+                        // Adiciona uma locação -
+                        //ViewLocacao.AddTodasLocacoes();
                         break;
                     }
-                    case 10:{
+                    case 8:{
+                        // Mostra UMA locação através do ID -
                         ViewLocacao.GetLocacoesIndividual();
                         break;
                     }
+                   
                 } 
-            }while(op!=11);
+            }while(op!=9);
         }
     }
 }

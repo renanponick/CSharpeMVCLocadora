@@ -8,7 +8,7 @@ namespace Repositories
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Filme> Filmes { get; set; }
         public DbSet<Locacao> Locacoes { get; set; }
-
+        public DbSet<FilmeLocacao> FilmesLocacoes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseMySql("Server=localhost;User Id=root;Database=blockbuster");
         }

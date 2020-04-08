@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace ViewClientes{
     public class ViewCliente{
+        // Adiciona todos os clientes - Ok
         public static void AddTodosClientes(){
             ControllerCliente.AddCliente("Junior Rezende", "15/05/1998", "123.123.123-32", 2);
             ControllerCliente.AddCliente("Tafarel Rezende", "12/07/1988", "143.153.123-32", 1);
@@ -13,6 +14,7 @@ namespace ViewClientes{
             ControllerCliente.AddCliente("Teste Rezende", "15/06/1998", "123.123.123-32", 4);
             ControllerCliente.AddCliente("Rezende", "15/07/1998", "123.123.123-32", 2);
         }
+         // Adiciona Um cliente - 
         public static void AddCliente (){
             try{
                 Console.WriteLine("Digite o Nome:");
@@ -28,11 +30,19 @@ namespace ViewClientes{
                 Console.WriteLine(e);
             }
         }
+
+         // Pega todos os clientes para mostrar em tela - Ok
         public static void GetClientes(){
             IEnumerable funcQuery = from clientes in ControllerCliente.GetClientes() select clientes;
              foreach (Cliente cliente in funcQuery) {
                 Console.Write(cliente);
             }
+        }
+        // Pega um cliente especificoo pelo ID - 
+        public static Cliente GetCliente(){
+            Console.WriteLine("Digite o id do cliente:");
+            int idCliente = Convert.ToInt32(Console.ReadLine());
+            return ControllerCliente.GetCliente(idCliente);
         }
     }
 }
