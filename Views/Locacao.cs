@@ -5,17 +5,21 @@ using System.Linq;
 
 namespace ViewLocacoes{
     public class ViewLocacao{
-        public static void AddLocacoes(){
-            ControllerLocacao.AddLocacoes();
-        }
+        // Busca uma locação específica pelo ID
         public static void GetLocacoesIndividual(){
             Console.WriteLine("Digite o ID da Locacao: ");
             int id = Convert.ToInt32 (Console.ReadLine());
-            Cliente clienteQuerry = (from cliente in ControllerCliente.GetClientes() 
-                                         where cliente.ClienteId == id select cliente).First();
-             Console.WriteLine(clienteQuerry); 
+            try{
+                Console.WriteLine(ControllerLocacao.GetLocacao(id));
+            }catch(Exception e){
+                Console.WriteLine(e);
+            } 
         }
-        public static void AddLocacao(){
+        // Adiciona todas as locações
+        public static void AddTodasLocacoes(){
+            ControllerLocacao.AddTodasLocacoes();
+        }
+        /*public static void AddLocacao(){
             int idLocacao, ClienteId;
             Console.WriteLine("Digite o id do cliente:");
             ClienteId = Convert.ToInt32(Console.ReadLine());
@@ -27,13 +31,12 @@ namespace ViewLocacoes{
                 opc = Convert.ToInt32(Console.ReadLine());
             }while(opc!=0);
             Console.WriteLine("Filme Cadastrado com Sucesso");
-        }
-        public static void AddFilmeLocacao(int idLocacao, int clienteId){
+
             int idFilme;
             Console.WriteLine("Digite o id do filme:");
             idFilme = Convert.ToInt32(Console.ReadLine());
             ControllerLocacao.AddFilmeLocacao(clienteId, idLocacao, idFilme);
-        }
+        }*/
     }
 }
            

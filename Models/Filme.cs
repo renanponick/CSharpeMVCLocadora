@@ -9,6 +9,7 @@ namespace Models
 {
     public class Filme
     {
+        [Key]
         public int FilmeId { get; set; }
         [Required]
         public String Nome { get; set; }
@@ -17,20 +18,9 @@ namespace Models
         public double Valor { get; set; }
         public int EstoqueTotal { get; set; }
         public int EstoqueAtual { get; set; }
-        [ForeignKey("Locacao")]
-        [Column(Order = 1)]
-        public int LocacaoId { get; set; }
         public int Locado { get; set; }
 
         public Filme(){}
-
-        public static List<Filme> GetFilmes(){
-            return RepositorioFilme.GetFilmes();
-        }
-
-        public static Filme GetFilme(int filmeId){
-            return RepositorioFilme.GetFilmes().Find(filme => filme.FilmeId == filmeId);
-        }
 
         // Construtor da classe
         public Filme(String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
@@ -48,6 +38,15 @@ namespace Models
             db.SaveChanges();
             
             RepositorioFilme.AddFilmes(this);
+        }
+        // metodo para buscar a lista de todos os filmes
+        public static List<Filme> GetFilmes(){
+            return RepositorioFilme.GetFilmes();
+        }
+        
+        // metodo para buscar um filme em específico
+        public static Filme GetFilme(int filmeId){
+            return RepositorioFilme.GetFilmes().Find(filme => filme.FilmeId == filmeId);
         }
 
         // Metodo para dizer que o filme foi locado e contabilizar

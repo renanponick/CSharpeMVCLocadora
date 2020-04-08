@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace ViewFilmes{
     public class ViewFilme{
+        // metodo para adicionar todos os filmes
         public static void AddTodosFilmes(){
             ControllerFilme.AddFilme("Jhon, e os quem", "25/10/2018", "Uma História", 2, 3);
             ControllerFilme.AddFilme("A volta dos que não foram", "23/10/2018", "Uma História linda de amor e superação", 1, 4);
@@ -18,6 +19,8 @@ namespace ViewFilmes{
             ControllerFilme.AddFilme("O final do inicio", "12/12/2018", "Uma História", 1, 5);
             ControllerFilme.AddFilme("O paraíso do Tártaro", "10/10/2018", "Uma História", 3, 4);
         }
+
+        // metodo para cadastrar um filme
         public static void AddFilme(){
             try{
                 Console.WriteLine("Digite o Título do Filme:");
@@ -35,10 +38,26 @@ namespace ViewFilmes{
                 Console.WriteLine(e);
             }
         }
+
+        // metodo para listar todos os filmes
         public static void GetFilmes(){
-            IEnumerable funcQuery = from filmes in ControllerFilme.GetFilmes() select filmes;
-             foreach (Filme filme in funcQuery) {
+            try{
+                IEnumerable funcQuery = from filmes in ControllerFilme.GetFilmes() select filmes;
+                foreach (Filme filme in funcQuery) {
+                    Console.Write(filme);
+                }
+            }catch(Exception e){
+                Console.WriteLine("Não há filme cadastrado");
+            }
+        }
+        public static void GetFilme(){
+            Console.WriteLine("Digite o Id do filme: ");
+            try{
+                int id = Convert.ToInt32(Console.ReadLine());
+                Filme filme = ControllerFilme.GetFilme(id);
                 Console.Write(filme);
+            }catch(Exception e){
+                 Console.WriteLine("Id não encontrado");
             }
         }
     }

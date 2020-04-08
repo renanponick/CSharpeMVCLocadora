@@ -34,10 +34,6 @@ namespace Models
             RepositorioCliente.AddClientes(this);
         }
 
-        public void InserirLocacao(Locacao locacao) {
-            RepositorioLocacao.AddLocacoes(locacao);
-        }
-
         public static List<Cliente> GetClientes(){
             return RepositorioCliente.GetClientes();
         }
@@ -53,7 +49,6 @@ namespace Models
                                             select Locacao;
             return Locacoes.ToList();
         }
-
         public override string ToString(){
              String retorno = $"Id: {ClienteId}\n"+
                                 $"Nome: {Nome}\n"+
