@@ -3,6 +3,7 @@ using Controllers;
 using Repositories;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Models
 {
@@ -18,20 +19,20 @@ namespace Models
         public Locacao(){}
         // Criando contrutor
         public Locacao (int clienteId, DateTime dtLocacao) {
-            //pega o ultimo id do repositorio
-            LocacaoId = RepositorioLocacao.GetUltimoIdLocacao()+1;
+            Context db = new Context();
             //informa o id da chave de relação
             ClienteId = clienteId;
             DataLocacao = dtLocacao;
             // adiciona a locação no repositorio de locações através do cliente
             InserirLocacao(this);
             //salvando no banco a locacao
-            Context db = new Context();
             db.Locacoes.Add(this);
             db.SaveChanges();
         }
         public void InserirLocacao(Locacao locacao) {
-            RepositorioLocacao.AddLocacoes(locacao);
+            Context db = new Context();
+            db.Locacoes.Add(locacao);
+            db.SaveChanges();
         }
         public List<Filme> GetFilmes(int LocacaoId){
             Context db = new Context();
@@ -54,7 +55,8 @@ namespace Models
         }
         
         public static Locacao GetLocacao(int locacaoId){
-            return RepositorioLocacao.GetLocacoes().Find(locacao => locacao.LocacaoId == locacaoId);
+            Context db = new Context();
+            return db.Locacoes.Find(locacaoId);
         }
 
         public override string ToString(){

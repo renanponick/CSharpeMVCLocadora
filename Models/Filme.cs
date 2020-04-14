@@ -2,8 +2,8 @@ using System;
 using Repositories;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Collections;
 
 namespace Models
 {
@@ -24,7 +24,6 @@ namespace Models
 
         // Construtor da classe
         public Filme(String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
-            FilmeId = RepositorioFilme.GetUltimoIdFilme()+1;
             Nome = nome;
             DataLancamento = dataLancamento;
             Sinopse = sinopse;
@@ -36,17 +35,18 @@ namespace Models
             Context db = new Context();
             db.Filmes.Add(this);
             db.SaveChanges();
-            
-            RepositorioFilme.AddFilmes(this);
         }
         // metodo para buscar a lista de todos os filmes
         public static List<Filme> GetFilmes(){
-            return RepositorioFilme.GetFilmes();
+            Context db = new Context();
+            IEnumerable<Filme> Filmes = from filmes in db.Filmes select filmes;
+            return Filmes.ToList();
         }
         
         // metodo para buscar um filme em específico
         public static Filme GetFilme(int filmeId){
-            return RepositorioFilme.GetFilmes().Find(filme => filme.FilmeId == filmeId);
+            Context db = new Context();
+            return db.Filmes.Find(filmeId);
         }
 
         // Metodo para dizer que o filme foi locado e contabilizar
@@ -55,7 +55,8 @@ namespace Models
                     $"Data Lançamento:  {DataLancamento} \n"+
                     $"Sinope: {Sinopse} \n"+
                     $"Valor: R$  {Valor} \nEstoque Atual:  {EstoqueAtual}\n"+
-                    $"Quantidade de locações feitas: {Locado}\n";
+                    //$"Quantidade de locações feitas: {Locado}
+                    "\n";
         }  
     }
 }

@@ -35,8 +35,4 @@ namespace Controllers{
         }*/
     }
 }
-/*
-6. `dotnet ef migrations add InitialDB`
-7. `dotnet ef database update
-*/
            

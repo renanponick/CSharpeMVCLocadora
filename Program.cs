@@ -41,7 +41,7 @@ namespace CSharpeAvaliacaoMVCLocadora
                     }
                     case 3:{
                         // Mostra UM filme através do ID - Ok
-                        ViewFilme.GetFilmes();
+                        ViewFilme.GetFilme();
                         break;
                     }
                     case 4:{
