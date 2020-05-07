@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Repositories;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Collections;
 
 namespace Models
 {
@@ -22,7 +22,6 @@ namespace Models
         public Cliente(){}
 
         public Cliente(String nome, String dataNascimento, String cpf, int dias){
-            ClienteId = RepositorioCliente.GetUltimoIdCliente()+1;
             Nome = nome;
             DataNascimento = dataNascimento;
             Cpf = cpf;
@@ -31,15 +30,17 @@ namespace Models
             Context db = new Context();
             db.Clientes.Add(this);
             db.SaveChanges();
-            RepositorioCliente.AddClientes(this);
         }
 
         public static List<Cliente> GetClientes(){
-            return RepositorioCliente.GetClientes();
+            Context db = new Context();
+            IEnumerable<Cliente> Clientes = from clientes in db.Clientes select clientes;
+            return Clientes.ToList();
         }
 
-        public static Cliente GetCliente(int ClienteId){
-            return RepositorioCliente.GetClientes().Find(cliente => cliente.ClienteId == ClienteId);
+        public static Cliente GetCliente(int clienteId){
+            Context db = new Context();
+            return db.Clientes.Find(clienteId);
         }
         
         public List<Locacao> GetLocacoes(int ClienteId){

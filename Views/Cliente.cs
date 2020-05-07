@@ -38,11 +38,15 @@ namespace ViewClientes{
                 Console.Write(cliente);
             }
         }
-        // Pega um cliente especificoo pelo ID - 
-        public static Cliente GetCliente(){
-            Console.WriteLine("Digite o id do cliente:");
-            int idCliente = Convert.ToInt32(Console.ReadLine());
-            return ControllerCliente.GetCliente(idCliente);
+        // Pega um cliente especificoo pelo ID - ok
+        public static void GetCliente(){
+            try{
+                Console.WriteLine("Digite o id do cliente:");
+                int idCliente = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine(ControllerCliente.GetCliente(idCliente));
+            }catch(Exception e){
+                Console.WriteLine("Cliente não encontrado");
+            }
         }
     }
 }
