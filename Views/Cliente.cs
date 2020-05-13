@@ -44,7 +44,7 @@ namespace ViewClientes{
                 Console.WriteLine("Digite o id do cliente:");
                 int idCliente = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine(ControllerCliente.GetCliente(idCliente));
-            }catch(Exception e){
+            }catch(Exception){
                 Console.WriteLine("Cliente não encontrado");
             }
         }

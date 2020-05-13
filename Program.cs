@@ -2,9 +2,6 @@ using System;
 using ViewClientes;
 using ViewFilmes;
 using ViewLocacoes;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using Components;
 
@@ -43,26 +40,39 @@ namespace CSharpeAvaliacaoMVCLocadora
             buttonCriarLocações = new ButtonsMenu("Criar Locações", this.Width-15, 0, 210, new System.EventHandler(this.CriarLocações));
             buttonConsultarLocações = new ButtonsMenu("Consultar Locações", this.Width-15, 0, 240, new System.EventHandler(this.ConsultarLocações));
             
-            this.Controls.Add(buttonImportarDados);
+            //this.Controls.Add(buttonImportarDados);
             this.Controls.Add(buttonAdicionarFilme);
             this.Controls.Add(buttonListarFilmes);
-            this.Controls.Add(buttonConsultarFilme);
+            //this.Controls.Add(buttonConsultarFilme);
             this.Controls.Add(buttonAdicionarCliente);
             this.Controls.Add(buttonListarClientes);
-            this.Controls.Add(buttonConsultarClientes);
+            //this.Controls.Add(buttonConsultarClientes);
             this.Controls.Add(buttonCriarLocações);
-            this.Controls.Add(buttonConsultarLocações);
+            //this.Controls.Add(buttonConsultarLocações);
         }
         public void ImportarDados(object sender, EventArgs args){
-            ViewFilme.AddTodosFilmes();
-            ViewCliente.AddTodosClientes();
-            ViewLocacao.AddTodasLocacoes();
+            var result = MessageBox.Show(
+                "Deseja importar os dados de: Filmes, Clientes e Locações?",
+                "Decisão",
+                MessageBoxButtons.YesNo
+            );
+            if(result == DialogResult.Yes){
+                ViewFilme.AddTodosFilmes();
+                ViewCliente.AddTodosClientes();
+                // falhando ViewLocacao.AddTodasLocacoes();
+                MessageBox.Show(
+                "Dados Importados",
+                "Informação",
+                MessageBoxButtons.OK);
+            }
         }
         public void AdicionarFilme(object sender, EventArgs args){
-            ViewFilme.AddFilme();
+            this.Hide();
+            new AddFilme(this).Show();
         }
         public void ListarFilmes(object sender, EventArgs args){
-            ViewFilme.GetFilmes();
+            this.Hide();
+            new ListagemFilmes(this).Show();
         }
         public void ConsultarFilme(object sender, EventArgs args){
             ViewFilme.GetFilme();
