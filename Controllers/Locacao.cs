@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Models;
@@ -6,37 +7,29 @@ using Repositories;
 
 namespace Controllers{
     public class ControllerLocacao{
-        /*public static void AddFilmeLocacao(int idCliente,int idLocacao,int idFilme){
-            if(RepositorioCliente.GetUltimoIdCliente()>0){
-                Cliente cliente =  RepositorioCliente.GetClientes().ElementAt(idCliente);
-                if(RepositorioLocacao.GetUltimoIdLocacao()>0){
-                    Locacao locacao = cliente.GetLocacoes(cliente.ClienteId).ElementAt(idLocacao);
-                    if(RepositorioFilme.GetUltimoIdFilme()>0){
-                        locacao.AdicionarFilme(RepositorioFilme.GetFilmes().ElementAt(idFilme));
-                    }
-                }
-            }
-        }*/
         public static void AddTodasLocacoes(){
             DateTime data = DateTime.Today;
-
-            Locacao locacao = new Locacao(1, data);
-            locacao.AdicionarFilme(1);
-            locacao.AdicionarFilme(2);
-            locacao.AdicionarFilme(3);
-
-            locacao = new Locacao(2, data);
-            locacao.AdicionarFilme(1);
-            locacao.AdicionarFilme(6);
-            locacao.AdicionarFilme(5);
-
-            locacao = new Locacao(3, data);
-            locacao.AdicionarFilme(10);
-            locacao.AdicionarFilme(9);
-            locacao.AdicionarFilme(7);
+            IEnumerable funcQuery = from clientes in ControllerCliente.GetClientes() select clientes;
+            foreach (Cliente cliente in funcQuery) {
+                Locacao locacao = new Locacao(cliente.ClienteId, data);
+                IEnumerable funcQueryFilm = from filmes in ControllerFilme.GetFilmes() select filmes;
+                    foreach (Filme filme in funcQueryFilm){
+                        locacao.AdicionarFilme(filme.FilmeId, locacao);
+                    }
+            }
+        }
+        public static void AddLocacao(int ClienteId, int[] filmes){
+            DateTime data = DateTime.Today;
+            Locacao locacao = new Locacao(ClienteId, data);
+            foreach (int filme in filmes){
+                locacao.AdicionarFilme(filme, locacao);
+            }
         }
         public static Locacao GetLocacao(int idLocacao){
             return Locacao.GetLocacao(idLocacao);
+        }
+        public static List<Locacao> GetLocacoes(){
+            return Locacao.GetLocacoes();
         }
         public static double CalcularPrecoFinal(Locacao locacao){
             double valorTotal=0;

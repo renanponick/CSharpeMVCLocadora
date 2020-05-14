@@ -35,6 +35,16 @@ namespace Components
         }
     }
 
+    public class ButtonsBuscar : Button
+    {
+        public ButtonsBuscar(int locationX, int locationY, EventHandler click)
+        {
+            this.Text = "Buscar";
+            this.Size = new Size(50 ,20);
+            this.Location = new Point(locationX, locationY);
+            this.Click += click;
+        }
+    }
 
     public class LabelPadrao : Label{
         public LabelPadrao(String name, int sizeX, int locationX, int locationY)
@@ -74,7 +84,6 @@ namespace Components
             this.View = View.Details;
             this.Location = new Point(10,10);
             this.Size = new Size(sizeX,sizeY);
-            this.View = View.Details;
             foreach(String colum in coluns){
                 this.Columns.Add(colum, -2, HorizontalAlignment.Left);
             }
@@ -83,5 +92,29 @@ namespace Components
             this.AllowColumnReorder = true;
             this.Sorting = SortOrder.Ascending;
         }
+    }  
+    public class SelectPadrao : ComboBox
+    {
+        public SelectPadrao(String[] linhas, int locationX, int locationY){
+            this.Location = new Point(locationX,locationY);
+            this.Size = new Size(150 ,30);
+            foreach(String linha in linhas){
+                this.Items.Add(linha);
+            }
+            this.SelectedItem = "Selecione";
+        }
     }
+    public class CheckedListPadrao : CheckedListBox
+    {
+        public CheckedListPadrao(String[] lista, int locationX, int locationY, int sizeX, int sizeY){
+            this.Location = new Point(locationX,locationY);
+            this.Size = new Size(sizeX,sizeY);
+            this.Items.AddRange(lista);
+            this.CheckOnClick = true;
+        }
+    }
+
+
+
+    
 }

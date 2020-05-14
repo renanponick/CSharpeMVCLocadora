@@ -25,11 +25,12 @@ namespace CSharpeAvaliacaoMVCLocadora
         ButtonsMenu buttonAdicionarCliente;
         ButtonsMenu buttonListarClientes;
         ButtonsMenu buttonConsultarClientes;
-        ButtonsMenu buttonCriarLocações;
-        ButtonsMenu buttonConsultarLocações;
+        ButtonsMenu buttonCriarLocacao;
+        ButtonsMenu buttonConsultarLocacoes;
+        ButtonsMenu buttonConsultarLocacao;
 
         public MenuPrincipal(){
-            this.Height = 320;
+            this.Height = 400;
             buttonImportarDados = new ButtonsMenu("Importar Dados", this.Width-15, 0, 0, new System.EventHandler(this.ImportarDados));
             buttonAdicionarFilme = new ButtonsMenu("Adicionar Filme", this.Width-15, 0, 30, new System.EventHandler(this.AdicionarFilme));
             buttonListarFilmes = new ButtonsMenu("Listar Filmes", this.Width-15, 0, 60, new System.EventHandler(this.ListarFilmes));
@@ -37,18 +38,20 @@ namespace CSharpeAvaliacaoMVCLocadora
             buttonAdicionarCliente = new ButtonsMenu("Adicionar Cliente", this.Width-15, 0, 120, new System.EventHandler(this.AdicionarCliente));
             buttonListarClientes = new ButtonsMenu("Listar Clientes", this.Width-15, 0, 150, new System.EventHandler(this.ListarClientes));
             buttonConsultarClientes = new ButtonsMenu("Consultar Clientes", this.Width-15, 0, 180, new System.EventHandler(this.ConsultarClientes));
-            buttonCriarLocações = new ButtonsMenu("Criar Locações", this.Width-15, 0, 210, new System.EventHandler(this.CriarLocações));
-            buttonConsultarLocações = new ButtonsMenu("Consultar Locações", this.Width-15, 0, 240, new System.EventHandler(this.ConsultarLocações));
-            
-            //this.Controls.Add(buttonImportarDados);
+            buttonCriarLocacao = new ButtonsMenu("Criar Locação", this.Width-15, 0, 210, new System.EventHandler(this.CriarLocacao));
+            buttonConsultarLocacoes = new ButtonsMenu("Consultar Todas as Locações", this.Width-15, 0, 240, new System.EventHandler(this.ConsultarLocacoes));
+            buttonConsultarLocacao = new ButtonsMenu("Consultar uma Locação", this.Width-15, 0, 270, new System.EventHandler(this.ConsultarLocacao));
+           
+            this.Controls.Add(buttonImportarDados);
             this.Controls.Add(buttonAdicionarFilme);
             this.Controls.Add(buttonListarFilmes);
-            //this.Controls.Add(buttonConsultarFilme);
+            this.Controls.Add(buttonConsultarFilme);
             this.Controls.Add(buttonAdicionarCliente);
             this.Controls.Add(buttonListarClientes);
-            //this.Controls.Add(buttonConsultarClientes);
-            this.Controls.Add(buttonCriarLocações);
-            //this.Controls.Add(buttonConsultarLocações);
+            this.Controls.Add(buttonConsultarClientes);
+            this.Controls.Add(buttonCriarLocacao);
+            this.Controls.Add(buttonConsultarLocacoes);
+            this.Controls.Add(buttonConsultarLocacao);
         }
         public void ImportarDados(object sender, EventArgs args){
             var result = MessageBox.Show(
@@ -59,7 +62,7 @@ namespace CSharpeAvaliacaoMVCLocadora
             if(result == DialogResult.Yes){
                 ViewFilme.AddTodosFilmes();
                 ViewCliente.AddTodosClientes();
-                // falhando ViewLocacao.AddTodasLocacoes();
+                ViewLocacao.AddTodasLocacoes();
                 MessageBox.Show(
                 "Dados Importados",
                 "Informação",
@@ -72,25 +75,35 @@ namespace CSharpeAvaliacaoMVCLocadora
         }
         public void ListarFilmes(object sender, EventArgs args){
             this.Hide();
-            new ListagemFilmes(this).Show();
+            new ListagemFilmes(this, 0).Show();
         }
         public void ConsultarFilme(object sender, EventArgs args){
-            ViewFilme.GetFilme();
+            this.Hide();
+            new GetFilme(this).Show();
         }
         public void AdicionarCliente(object sender, EventArgs args){
-            ViewCliente.AddCliente();
+             this.Hide();
+            new AddCliente(this).Show();
         }
         public void ListarClientes(object sender, EventArgs args){
-            ViewCliente.GetClientes();
+            this.Hide();
+            new ListagemClientes(this, 0).Show();
         }
         public void ConsultarClientes(object sender, EventArgs args){
-            ViewCliente.GetCliente();
+            this.Hide();
+            new GetCliente(this).Show();
         }
-        public void CriarLocações(object sender, EventArgs args){
-            ViewLocacao.AddTodasLocacoes();
+        public void CriarLocacao(object sender, EventArgs args){
+            this.Hide();
+            new AddLocacao(this).Show();
         }
-        public void ConsultarLocações(object sender, EventArgs args){
-            ViewLocacao.GetLocacoesIndividual();
+        public void ConsultarLocacoes(object sender, EventArgs args){
+            this.Hide();
+            new ListagemLocacao(this, 0).Show();
+        }
+        public void ConsultarLocacao(object sender, EventArgs args){
+            this.Hide();
+            new GetLocacao(this).Show();
         }
     }
 }
