@@ -8,48 +8,11 @@ using System.Drawing;
 using Components;
 
 namespace ViewFilmes{
-    public class ListagemFilmes : Form{
+    public partial class ListagemFilmes : Form{
         Form parent;
-        Listners listagemFilmes;
-        ButtonsVoltar buttonVoltar;
         public ListagemFilmes(Form parent, int id){
             this.parent = parent;
-            this.Text = "Listar Filmes";
-            this.Size = new Size(440, 500);
-            String[] coluns = {"ID","Título","Data Lançamento","Valor","Disponiveis"};
-            listagemFilmes = new Listners(coluns, 400, 400);
-            if(id==0){
-                try{
-                    IEnumerable funcQuery = from filmes in ControllerFilme.GetFilmes() select filmes;
-                    foreach (Filme filme in funcQuery) {
-                        ListViewItem filme1 = new ListViewItem(filme.FilmeId.ToString());
-                        filme1.SubItems.Add(filme.Nome);
-                        filme1.SubItems.Add(filme.DataLancamento);
-                        filme1.SubItems.Add("R$: "+filme.Valor.ToString());
-                        filme1.SubItems.Add(filme.EstoqueAtual.ToString());
-                        listagemFilmes.Items.AddRange(new ListViewItem[]{filme1});
-                    }
-                }catch(Exception){
-                    ListViewItem filme1 = new ListViewItem("Nenhum filme encontrado");
-                    listagemFilmes.Items.AddRange(new ListViewItem[]{filme1});
-                } 
-            }else if(id>0){
-                try{
-                    Filme filme = ControllerFilme.GetFilme(id);
-                    ListViewItem filme1 = new ListViewItem(filme.FilmeId.ToString());
-                    filme1.SubItems.Add(filme.Nome);
-                    filme1.SubItems.Add(filme.DataLancamento);
-                    filme1.SubItems.Add("R$: "+filme.Valor.ToString());
-                    filme1.SubItems.Add(filme.EstoqueAtual.ToString());
-                    listagemFilmes.Items.AddRange(new ListViewItem[]{filme1});
-                }catch(Exception){
-                    ListViewItem filme1 = new ListViewItem("Nenhum filme encontrado");
-                    listagemFilmes.Items.AddRange(new ListViewItem[]{filme1});
-                } 
-            }
-            buttonVoltar = new ButtonsVoltar(this.Width/3+50, listagemFilmes.Height+10, new System.EventHandler(this.Voltar));
-            this.Controls.Add(listagemFilmes);
-            this.Controls.Add(buttonVoltar);
+            InitializeComponent(id);
         }
         public void Voltar(object sender, EventArgs args){
             this.parent.Show();
@@ -148,35 +111,25 @@ namespace ViewFilmes{
             ControllerFilme.AddFilme("O paraíso do Tártaro", "10/10/2018", "Uma História", 3, 6);
         }
     }
-    public class GetFilme : Form{
+    public partial class GetFilme : Form{
         Form parent;
-        ButtonsVoltar buttonVoltar;
-        ButtonsBuscar buttonsBuscar;
-        LabelPadrao labelId;
-        InputPadrao inputId;
         public GetFilme(Form parent){
-                this.parent = parent;
-                this.Text = "Buscar Filme";
-                this.Height = 250;
-                labelId = new LabelPadrao("Digite o ID do Filme:", 200, 5, 30);
-                inputId = new InputPadrao(this.Width-30, 5, 70);
-
-                buttonVoltar = new ButtonsVoltar(this.Width/3-20, 100, Voltar);
-                buttonsBuscar = new ButtonsBuscar(this.Width/3+40, 100, Buscar);
-
-                this.Controls.Add(labelId);
-                this.Controls.Add(inputId);
-                this.Controls.Add(buttonVoltar);
-                this.Controls.Add(buttonsBuscar);
+            this.parent = parent;
+            InitializeComponent();
         }
         public void Voltar(object sender, EventArgs args){
             this.parent.Show();
             this.Close();
         }
         public void Buscar(object sender, EventArgs args){
-            int id = Convert.ToInt32(this.inputId.Text);
-            new ListagemFilmes(this, id).Show();
-            this.Hide();
+            if(this.inputId.Text.Length <1){
+                this.inputIdError.SetError(this.inputId, "Não pode ser vazio");
+            }else{
+                  this.inputIdError.SetError(this.inputId, String.Empty);
+                int id = Convert.ToInt32(this.inputId.Text);
+                new ListagemFilmes(this, id).Show();
+                this.Hide();
+            }
         }
     }
 }
