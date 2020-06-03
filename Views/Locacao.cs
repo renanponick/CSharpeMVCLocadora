@@ -2,13 +2,13 @@ using System;
 using Controllers;
 using System.Linq;
 using Models;
-using Components;
+using View.Lib;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ViewLocacoes{
+namespace View{
     public class ViewLocacao{
         public static void AddTodasLocacoes(){
             ControllerLocacao.AddTodasLocacoes();
@@ -79,7 +79,7 @@ namespace ViewLocacoes{
                     listagemLocacao.Items.AddRange(new ListViewItem[]{locacao1});
                 } 
             }
-            buttonVoltar = new ButtonsVoltar(this.Width/3+50, listagemLocacao.Height+10, new System.EventHandler(this.Voltar));
+            buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
             this.Controls.Add(listagemLocacao);
             this.Controls.Add(buttonVoltar);
         }
@@ -101,7 +101,7 @@ namespace ViewLocacoes{
                 labelId = new LabelPadrao("Digite o ID da Locação:", 200, 5, 30);
                 inputId = new InputPadrao(this.Width-30, 5, 70);
 
-                buttonVoltar = new ButtonsVoltar(this.Width/3-20, 100, Voltar);
+                buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonsBuscar = new ButtonsBuscar(this.Width/3+40, 100, Buscar);
 
                 this.Controls.Add(labelId);
@@ -148,7 +148,7 @@ namespace ViewLocacoes{
                 selectCliente = new SelectPadrao(select.ToArray(), 5, 40);
                 labelFilmes = new LabelPadrao("Selecione os filmes:", 150, 0, 70);
                 listaFilmes = new CheckedListPadrao(listFilmes.ToArray(), 5, 100, this.Width-35, 300);
-                buttonVoltar = new ButtonsVoltar(this.Width/3-20, 400, Voltar);
+                buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonSalvar = new ButtonsSalvar(this.Width/3+40, 400, Salvar);
 
                 this.Controls.Add(labelCliente);
@@ -157,10 +157,6 @@ namespace ViewLocacoes{
                 this.Controls.Add(listaFilmes);
                 this.Controls.Add(buttonVoltar);
                 this.Controls.Add(buttonSalvar);
-        }
-        public void Voltar(object sender, EventArgs args){
-            this.parent.Show();
-            this.Close();
         }
         public void Salvar(object sender, EventArgs args){
             try{

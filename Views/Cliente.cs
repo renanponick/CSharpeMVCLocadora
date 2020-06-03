@@ -5,9 +5,9 @@ using System.Collections;
 using System.Linq;
 using System.Windows.Forms;
 using System.Drawing;
-using Components;
+using View.Lib;
 
-namespace ViewClientes{
+namespace View{
     public class ViewCliente{
         // Adiciona todos os clientes - Ok
         public static void AddTodosClientes(){
@@ -55,13 +55,9 @@ namespace ViewClientes{
                     listagemClientes.Items.AddRange(new ListViewItem[]{cliente1});
                 } 
             }
-            buttonVoltar = new ButtonsVoltar(this.Width/3+50, listagemClientes.Height+10, new System.EventHandler(this.Voltar));
+            buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
             this.Controls.Add(listagemClientes);
             this.Controls.Add(buttonVoltar);
-        }
-        public void Voltar(object sender, EventArgs args){
-            this.parent.Show();
-            this.Close();
         }
     }
     public class GetCliente : Form{
@@ -77,17 +73,13 @@ namespace ViewClientes{
                 labelId = new LabelPadrao("Digite o ID do Cliente:", 200, 5, 30);
                 inputId = new InputPadrao(this.Width-30, 5, 70);
 
-                buttonVoltar = new ButtonsVoltar(this.Width/3-20, 100, Voltar);
+                buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonsBuscar = new ButtonsBuscar(this.Width/3+40, 100, Buscar);
 
                 this.Controls.Add(labelId);
                 this.Controls.Add(inputId);
                 this.Controls.Add(buttonVoltar);
                 this.Controls.Add(buttonsBuscar);
-        }
-        public void Voltar(object sender, EventArgs args){
-            this.parent.Show();
-            this.Close();
         }
         public void Buscar(object sender, EventArgs args){
             int id = Convert.ToInt32(this.inputId.Text);
@@ -124,7 +116,7 @@ namespace ViewClientes{
                 labelDiasDev = new LabelPadrao("Digite a quantidade de dias para devolução:", 200, 5, 180);
                 inputDiasDev = new InputMascarado(this.Width-30, 5, 210, "09");
 
-                buttonVoltar = new ButtonsVoltar(this.Width/3-20, 250, Voltar);
+                buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonSalvar = new ButtonsSalvar(this.Width/3+40, 250, Salvar);
 
                 this.Controls.Add(labelNome);
@@ -139,10 +131,6 @@ namespace ViewClientes{
                 
                 this.Controls.Add(buttonVoltar);
                 this.Controls.Add(buttonSalvar);
-        }
-        public void Voltar(object sender, EventArgs args){
-            this.parent.Show();
-            this.Close();
         }
         public void Salvar(object sender, EventArgs args){
             try{
