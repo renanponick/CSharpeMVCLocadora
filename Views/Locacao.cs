@@ -98,8 +98,8 @@ namespace View{
                 this.parent = parent;
                 this.Text = "Buscar Locacao";
                 this.Height = 250;
-                labelId = new LabelPadrao("Digite o ID da Locação:", 200, 5, 30);
-                inputId = new InputPadrao(this.Width-30, 5, 70);
+                labelId = new LabelPadrao("Digite o ID da Locação:", 200);
+                inputId = new InputPadrao(70);
 
                 buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonsBuscar = new ButtonsBuscar(this.Width/3+40, 100, Buscar);
@@ -144,10 +144,10 @@ namespace View{
                 foreach (Filme filme in filmes)                {
                     listFilmes.Add(filme.FilmeId.ToString()+"-"+ filme.Nome);
                 }
-                labelCliente = new LabelPadrao("Selecione o cliente:", 150, 0, 10);
-                selectCliente = new SelectPadrao(select.ToArray(), 5, 40);
-                labelFilmes = new LabelPadrao("Selecione os filmes:", 150, 0, 70);
-                listaFilmes = new CheckedListPadrao(listFilmes.ToArray(), 5, 100, this.Width-35, 300);
+                labelCliente = new LabelPadrao("Selecione o cliente:", 150);
+                selectCliente = new SelectPadrao(select.ToArray());
+                labelFilmes = new LabelPadrao("Selecione os filmes:", 150);
+                listaFilmes = new CheckedListPadrao(listFilmes.ToArray(), this.Width-35, 300);
                 buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonSalvar = new ButtonsSalvar(this.Width/3+40, 400, Salvar);
 

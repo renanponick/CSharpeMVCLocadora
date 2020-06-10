@@ -44,6 +44,7 @@ namespace CSharpeAvaliacaoMVCLocadora
             this.Controls.Add(buttonAdicionarFilme);
             this.Controls.Add(buttonListarFilmes);
             this.Controls.Add(buttonConsultarFilme);
+            
             this.Controls.Add(buttonAdicionarCliente);
             this.Controls.Add(buttonListarClientes);
             this.Controls.Add(buttonConsultarClientes);
@@ -73,7 +74,7 @@ namespace CSharpeAvaliacaoMVCLocadora
         }
         public void ListarFilmes(object sender, EventArgs args){
             this.Hide();
-            new ListagemFilmes(this, 0).Show();
+            new ListagemFilmes(this).Show();
         }
         public void ConsultarFilme(object sender, EventArgs args){
             this.Hide();
@@ -81,7 +82,7 @@ namespace CSharpeAvaliacaoMVCLocadora
         }
         public void AdicionarCliente(object sender, EventArgs args){
              this.Hide();
-            new AddCliente(this).Show();
+            //new AddCliente(this).Show();
         }
         public void ListarClientes(object sender, EventArgs args){
             this.Hide();
@@ -97,7 +98,7 @@ namespace CSharpeAvaliacaoMVCLocadora
         }
         public void ConsultarLocacoes(object sender, EventArgs args){
             this.Hide();
-            new ListagemLocacao(this, 0).Show();
+           // new ListagemLocacao(this).Show();
         }
         public void ConsultarLocacao(object sender, EventArgs args){
             this.Hide();

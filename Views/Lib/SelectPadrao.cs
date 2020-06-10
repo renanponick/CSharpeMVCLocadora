@@ -8,8 +8,7 @@ namespace View
     { 
         public class SelectPadrao : ComboBox
         {
-            public SelectPadrao(String[] linhas, int locationX, int locationY){
-                this.Location = new Point(locationX,locationY);
+            public SelectPadrao(String[] linhas){
                 this.Size = new Size(150 ,30);
                 foreach(String linha in linhas){
                     this.Items.Add(linha);

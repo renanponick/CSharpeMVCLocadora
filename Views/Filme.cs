@@ -1,13 +1,9 @@
 using System;
-using Models;
 using Controllers;
-using System.Collections;
-using System.Linq;
 using System.Windows.Forms;
-using System.Drawing;
-using View.Lib;
 
 namespace View{
+    //OK
     public class ViewFilme{
         // metodo para adicionar todos os filmes
         public static void AddTodosFilmes(){
@@ -23,11 +19,13 @@ namespace View{
             ControllerFilme.AddFilme("O paraíso do Tártaro", "10/10/2018", "Uma História", 3, 6);
         }
     }
+   
+    //
     public partial class ListagemFilmes : Form{
         Form parent;
-        public ListagemFilmes(Form parent, int id){
+        public ListagemFilmes(Form parent){
             this.parent = parent;
-            InitializeComponent(id);
+            InitializeComponent();
         }
     }
     public partial class AddFilme : Form{
@@ -71,8 +69,25 @@ namespace View{
             }else{
                   this.inputIdError.SetError(this.inputId, String.Empty);
                 int id = Convert.ToInt32(this.inputId.Text);
-                new ListagemFilmes(this, id).Show();
+                //ew ListagemFilmes(this, id).Show();
                 this.Hide();
+                /*
+                    }else if(id>0){
+                        try{
+                            Filme filme = ControllerFilme.GetFilme(id);
+                            ListViewItem filme1 = new ListViewItem(filme.FilmeId.ToString());
+                            filme1.SubItems.Add(filme.Nome);
+                            filme1.SubItems.Add(filme.DataLancamento);
+                            filme1.SubItems.Add("R$: "+filme.Valor.ToString());
+                            filme1.SubItems.Add(filme.EstoqueAtual.ToString());
+                            listagemFilmes.Items.AddRange(new ListViewItem[]{filme1});
+                        }catch(Exception){
+                            ListViewItem filme1 = new ListViewItem("Nenhum filme encontrado");
+                            listagemFilmes.Items.AddRange(new ListViewItem[]{filme1});
+                        } 
+                    }
+
+                */
             }
         }
     }

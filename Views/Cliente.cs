@@ -70,8 +70,8 @@ namespace View{
                 this.parent = parent;
                 this.Text = "Buscar Cliente";
                 this.Height = 250;
-                labelId = new LabelPadrao("Digite o ID do Cliente:", 200, 5, 30);
-                inputId = new InputPadrao(this.Width-30, 5, 70);
+                labelId = new LabelPadrao("Digite o ID do Cliente:", 200);
+                inputId = new InputPadrao(70);
 
                 buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonsBuscar = new ButtonsBuscar(this.Width/3+40, 100, Buscar);
@@ -99,22 +99,26 @@ namespace View{
         InputMascarado inputNascimento;
         InputMascarado inputCpf;
         InputMascarado inputDiasDev;
-        public AddCliente(Form parent){
+        public AddCliente(Form parent, Boolean update){
                 this.parent = parent;
                 this.Text = "Adicionar Cliente";
                 this.Height = 400;
-                
-                labelNome = new LabelPadrao("Digite o Nome:", 200, 5, 10);
-                inputNome = new InputPadrao(this.Width-30, 5, 30);
 
-                labelNascimento = new LabelPadrao("Digite a data de nascimento:", 200, 5, 60);
-                inputNascimento = new InputMascarado(this.Width-30, 5, 90, "99/99/9999");
+                if(update){
+                   // this.Load += new EventHandler(this.setDataClient);
+                }
                 
-                labelCpf = new LabelPadrao("Descreva o CPF:", 200, 5, 120);
-                inputCpf = new InputMascarado(this.Width-30, 5, 150, "999,999,999-99");
+                labelNome = new LabelPadrao("Digite o Nome:", 10);
+                inputNome = new InputPadrao(30);
 
-                labelDiasDev = new LabelPadrao("Digite a quantidade de dias para devolução:", 200, 5, 180);
-                inputDiasDev = new InputMascarado(this.Width-30, 5, 210, "09");
+                labelNascimento = new LabelPadrao("Digite a data de nascimento:", 200);
+                inputNascimento = new InputMascarado(90, "99/99/9999");
+                
+                labelCpf = new LabelPadrao("Descreva o CPF:", 200);
+                inputCpf = new InputMascarado(150, "999,999,999-99");
+
+                labelDiasDev = new LabelPadrao("Digite a quantidade de dias para devolução:", 200);
+                inputDiasDev = new InputMascarado(210, "09");
 
                 buttonVoltar = new ButtonsVoltar(0,0, this ,this.parent);
                 buttonSalvar = new ButtonsSalvar(this.Width/3+40, 250, Salvar);
@@ -151,6 +155,9 @@ namespace View{
                     "Informação",
                     MessageBoxButtons.OK);
             }
+        }
+        public void setDataClient(object sender, EventArgs args, int id){
+            Cliente cliente = ControllerCliente.GetCliente(id);
         }
     }
 }

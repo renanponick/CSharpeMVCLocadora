@@ -12,7 +12,7 @@ namespace View
             {
                 this.Text = "Salvar";
                 this.Size = new Size(50 ,20);
-                this.Location = new Point(locationX, locationY);
+                this.Location = new Point(locationX+40, locationY+30);
                 this.Click += click;
             }
         }
@@ -31,7 +31,7 @@ namespace View
             {
                 this.Text = "Voltar";
                 this.Size = new Size(50 ,20);
-                this.Location = new Point(locationX, locationY);
+                this.Location = new Point(locationX-30, locationY+30);
                 this.parent = parent;
                 this.form = form;
                 this.Click += new EventHandler(this.Voltar);
