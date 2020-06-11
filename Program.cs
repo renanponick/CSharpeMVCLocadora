@@ -39,12 +39,12 @@ namespace CSharpeAvaliacaoMVCLocadora
             buttonCriarLocacao = new ButtonMenu("Criar Locação", this.Width-15, 0, 210, new System.EventHandler(this.CriarLocacao));
             buttonConsultarLocacoes = new ButtonMenu("Consultar Todas as Locações", this.Width-15, 0, 240, new System.EventHandler(this.ConsultarLocacoes));
             buttonConsultarLocacao = new ButtonMenu("Consultar uma Locação", this.Width-15, 0, 270, new System.EventHandler(this.ConsultarLocacao));
-           
+           //Corrigidos
             this.Controls.Add(buttonImportarDados);
             this.Controls.Add(buttonAdicionarFilme);
             this.Controls.Add(buttonListarFilmes);
             this.Controls.Add(buttonConsultarFilme);
-            
+            //Falta corrigir
             this.Controls.Add(buttonAdicionarCliente);
             this.Controls.Add(buttonListarClientes);
             this.Controls.Add(buttonConsultarClientes);
