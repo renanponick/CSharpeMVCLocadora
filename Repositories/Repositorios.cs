@@ -13,6 +13,5 @@ namespace Repositories
             //=> options.UseMySql("Server=localhost;User Id=root;Database=blockbuster");
             => options.UseMySql($"Server=db-app.cjfysft933dn.us-east-1.rds.amazonaws.com;User Id={Dados.Login};Password={Dados.Senha};Database=blockbuster");
             //=> options.UseMySql("server=localhost;database=library;user=mysqlschema;password=mypassword");
-        
         }
 }

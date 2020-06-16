@@ -24,7 +24,7 @@ namespace CSharpeAvaliacaoMVCLocadora
         ButtonMenu buttonListarClientes;
         ButtonMenu buttonConsultarClientes;
         ButtonMenu buttonCriarLocacao;
-        ButtonMenu buttonConsultarLocacoes;
+        ButtonMenu buttonListarLocacoes;
         ButtonMenu buttonConsultarLocacao;
 
         public MenuPrincipal(){
@@ -33,23 +33,23 @@ namespace CSharpeAvaliacaoMVCLocadora
             buttonAdicionarFilme = new ButtonMenu("Adicionar Filme", this.Width-15, 0, 30, new System.EventHandler(this.AdicionarFilme));
             buttonListarFilmes = new ButtonMenu("Listar Filmes", this.Width-15, 0, 60, new System.EventHandler(this.ListarFilmes));
             buttonConsultarFilme = new ButtonMenu("Consultar Filme", this.Width-15, 0, 90, new System.EventHandler(this.ConsultarFilme));
-            buttonAdicionarCliente = new ButtonMenu("Adicionar Cliente", this.Width-15, 0, 120, new System.EventHandler(this.AdicionarCliente));
-            buttonListarClientes = new ButtonMenu("Listar Clientes", this.Width-15, 0, 150, new System.EventHandler(this.ListarClientes));
-            buttonConsultarClientes = new ButtonMenu("Consultar Clientes", this.Width-15, 0, 180, new System.EventHandler(this.ConsultarClientes));
-            buttonCriarLocacao = new ButtonMenu("Criar Locação", this.Width-15, 0, 210, new System.EventHandler(this.CriarLocacao));
-            buttonConsultarLocacoes = new ButtonMenu("Consultar Todas as Locações", this.Width-15, 0, 240, new System.EventHandler(this.ConsultarLocacoes));
-            buttonConsultarLocacao = new ButtonMenu("Consultar uma Locação", this.Width-15, 0, 270, new System.EventHandler(this.ConsultarLocacao));
+            buttonAdicionarCliente = new ButtonMenu("Adicionar Cliente", this.Width-15, 0, 150, new System.EventHandler(this.AdicionarCliente));
+            buttonListarClientes = new ButtonMenu("Listar Clientes", this.Width-15, 0, 180, new System.EventHandler(this.ListarClientes));
+            buttonConsultarClientes = new ButtonMenu("Consultar Clientes", this.Width-15, 0, 210, new System.EventHandler(this.ConsultarClientes));
+            buttonCriarLocacao = new ButtonMenu("Realizar Locação", this.Width-15, 0, 270, new System.EventHandler(this.CriarLocacao));
+            buttonListarLocacoes = new ButtonMenu("Listar Todas as Locações", this.Width-15, 0, 300, new System.EventHandler(this.ListarLocacoes));
+            buttonConsultarLocacao = new ButtonMenu("Consultar uma Locação", this.Width-15, 0, 330, new System.EventHandler(this.ConsultarLocacao));
            //Corrigidos
             this.Controls.Add(buttonImportarDados);
             this.Controls.Add(buttonAdicionarFilme);
             this.Controls.Add(buttonListarFilmes);
-            this.Controls.Add(buttonConsultarFilme);
-            //Falta corrigir
-            this.Controls.Add(buttonAdicionarCliente);
             this.Controls.Add(buttonListarClientes);
-            this.Controls.Add(buttonConsultarClientes);
+            this.Controls.Add(buttonAdicionarCliente);
+            this.Controls.Add(buttonListarLocacoes);
             this.Controls.Add(buttonCriarLocacao);
-            this.Controls.Add(buttonConsultarLocacoes);
+            //Falta corrigir
+            this.Controls.Add(buttonConsultarFilme);
+            this.Controls.Add(buttonConsultarClientes);
             this.Controls.Add(buttonConsultarLocacao);
         }
         public void ImportarDados(object sender, EventArgs args){
@@ -82,11 +82,11 @@ namespace CSharpeAvaliacaoMVCLocadora
         }
         public void AdicionarCliente(object sender, EventArgs args){
              this.Hide();
-            //new AddCliente(this).Show();
+            new AddCliente(this).Show();
         }
         public void ListarClientes(object sender, EventArgs args){
             this.Hide();
-            new ListagemClientes(this, 0).Show();
+            new ListagemClientes(this).Show();
         }
         public void ConsultarClientes(object sender, EventArgs args){
             this.Hide();
@@ -96,9 +96,9 @@ namespace CSharpeAvaliacaoMVCLocadora
             this.Hide();
             new AddLocacao(this).Show();
         }
-        public void ConsultarLocacoes(object sender, EventArgs args){
+        public void ListarLocacoes(object sender, EventArgs args){
             this.Hide();
-           // new ListagemLocacao(this).Show();
+            new ListagemLocacao(this).Show();
         }
         public void ConsultarLocacao(object sender, EventArgs args){
             this.Hide();
