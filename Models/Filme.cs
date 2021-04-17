@@ -36,6 +36,42 @@ namespace Models
             db.Filmes.Add(this);
             db.SaveChanges();
         }
+
+         public static void UpdateFilm(int id, String nome, String dataLancamento, String sinopse, double valor, int estoqueTotal){
+            Context db = new Context();
+            try{
+                Filme filme = GetFilme(id);
+                filme.Nome = nome;
+                filme.DataLancamento = dataLancamento;
+                filme.Sinopse = sinopse;
+                filme.Valor = valor;
+                filme.EstoqueTotal = estoqueTotal;
+                try{
+                    db.SaveChanges();
+                }catch(Exception){
+                    //InvalidOperationException
+                    //ArgumentException
+                    throw new Exception("Não alterou");
+                }
+            }catch{
+                throw new Exception("Filme não encontrado");
+            }
+        }
+        public static void DeleteClient(int id){
+            Context db = new Context();
+            try{
+                Filme filme = db.Filmes.First(filme => filme.FilmeId == id);
+                db.Remove(filme);
+                try{
+                    db.SaveChanges();
+                }catch{
+                    throw new Exception("Tem locações para este filme");
+                }
+            }catch{
+                throw new Exception("Filme não encontrado");
+            }
+        }
+
         // metodo para buscar a lista de todos os filmes
         public static List<Filme> GetFilmes(){
             Context db = new Context();

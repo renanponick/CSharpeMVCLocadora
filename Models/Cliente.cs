@@ -31,7 +31,39 @@ namespace Models
             db.Clientes.Add(this);
             db.SaveChanges();
         }
-
+        public static void UpdateClient(int id, String nome, String dataNascimento, String cpf, int dias){
+            Context db = new Context();
+            try{
+                Cliente cliente = GetCliente(id);
+                cliente.Nome = nome;
+                cliente.DataNascimento = dataNascimento;
+                cliente.Cpf = cpf;
+                cliente.Dias = dias;
+                try{
+                    db.SaveChanges();
+                }catch(Exception){
+                    //InvalidOperationException
+                    //ArgumentException
+                    throw new Exception("Não alterou");
+                }
+            }catch{
+                throw new Exception("Cliente não encontrado");
+            }
+        }
+        public static void DeleteClient(int id){
+            Context db = new Context();
+            try{
+                Cliente cliente = db.Clientes.First(cliente => cliente.ClienteId == id);
+                db.Remove(cliente);
+                try{
+                    db.SaveChanges();
+                }catch{
+                    throw new Exception("Tem locações para este cliente");
+                }
+            }catch{
+                throw new Exception("Cliente não encontrado");
+            }
+        }
         public static List<Cliente> GetClientes(){
             Context db = new Context();
             IEnumerable<Cliente> Clientes = from clientes in db.Clientes select clientes;
