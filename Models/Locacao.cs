@@ -25,9 +25,6 @@ namespace Models
             DataLocacao = dtLocacao;
             // adiciona a locação no repositorio de locações através do cliente
             InserirLocacao(this);
-            //salvando no banco a locacao
-            db.Locacoes.Add(this);
-            db.SaveChanges();
         }
         public void InserirLocacao(Locacao locacao) {
             Context db = new Context();
@@ -41,7 +38,7 @@ namespace Models
                                     select Filmes.Filme;
             return filmes.ToList();
         }
-        public void AdicionarFilme(int filmeId){
+        public void AdicionarFilme(int filmeId, Locacao locacao){
             //toda vez que eu for adicionar um filme preciso relacionar agora a classe relacional indicando o 
             //filme e a locação correspondente
             var db = new Context();
@@ -49,7 +46,10 @@ namespace Models
                 FilmeId = filmeId,
                 LocacaoId = LocacaoId
             };
+
             db.FilmesLocacoes.Add(filmeLocacao);
+            this.ValorTotal = ControllerLocacao.CalcularPrecoFinal(locacao);
+            db.Locacoes.Update(locacao);
             db.SaveChanges();
             ControllerFilme.FilmeLocado(filmeId);
         }
@@ -57,6 +57,11 @@ namespace Models
         public static Locacao GetLocacao(int locacaoId){
             Context db = new Context();
             return db.Locacoes.Find(locacaoId);
+        }
+        public static List<Locacao> GetLocacoes(){
+            Context db = new Context();
+            IEnumerable<Locacao> Locacoes = from locacoes in db.Locacoes select locacoes;
+            return Locacoes.ToList();
         }
 
         public override string ToString(){
